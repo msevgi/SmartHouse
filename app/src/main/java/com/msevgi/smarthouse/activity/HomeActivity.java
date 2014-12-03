@@ -1,7 +1,5 @@
-
 package com.msevgi.smarthouse.activity;
 
-import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,55 +13,60 @@ import com.msevgi.smarthouse.R;
 
 import java.io.IOException;
 
-public class HomeActivity extends Activity implements OnClickListener {
+import butterknife.InjectView;
 
-   Button               btnRegId;
-   EditText             etRegId;
-   GoogleCloudMessaging gcm;
-   String               regid;
-   String               PROJECT_NUMBER = "43979242575";
+public class HomeActivity extends BaseActionBarActivity implements OnClickListener {
 
-   @Override
-   protected void onCreate(Bundle savedInstanceState) {
-      super.onCreate(savedInstanceState);
-      setContentView(R.layout.layout_home);
+    @InjectView(R.id.btnGetRegId)
+    Button btnRegId;
+    @InjectView(R.id.etRegId)
+    EditText etRegId;
 
-      btnRegId = (Button) findViewById(R.id.btnGetRegId);
-      etRegId = (EditText) findViewById(R.id.etRegId);
+    GoogleCloudMessaging gcm;
+    String regid;
+    String PROJECT_NUMBER = "43979242575";
 
-      btnRegId.setOnClickListener(this);
-   }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-   public void getRegId() {
-      new AsyncTask<Void, Void, String>() {
-         @Override
-         protected String doInBackground(Void... params) {
-            String msg = "";
-            try {
-               if (gcm == null) {
-                  gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
-               }
-               regid = gcm.register(PROJECT_NUMBER);
-               msg = "Device registered, registration ID=" + regid;
-               Log.i("GCM", msg);
+        btnRegId.setOnClickListener(this);
+    }
 
+    @Override
+    protected int getLayoutResource() {
+        return R.layout.layout_home;
+    }
+
+    public void getRegId() {
+        new AsyncTask<Void, Void, String>() {
+            @Override
+            protected String doInBackground(Void... params) {
+                String msg = "";
+                try {
+                    if (gcm == null) {
+                        gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
+                    }
+                    regid = gcm.register(PROJECT_NUMBER);
+                    msg = "Device registered, registration ID=" + regid;
+                    Log.i("GCM", msg);
+
+                } catch (IOException ex) {
+                    msg = "Error :" + ex.getMessage();
+
+                }
+                return msg;
             }
-            catch (IOException ex) {
-               msg = "Error :" + ex.getMessage();
 
+            @Override
+            protected void onPostExecute(String msg) {
+                etRegId.setText(msg + "\n");
             }
-            return msg;
-         }
+        }.execute(null, null, null);
+    }
 
-         @Override
-         protected void onPostExecute(String msg) {
-            etRegId.setText(msg + "\n");
-         }
-      }.execute(null, null, null);
-   }
-
-   @Override
-   public void onClick(View v) {
-      getRegId();
-   }
+    @Override
+    public void onClick(View v) {
+        getRegId();
+    }
 }
