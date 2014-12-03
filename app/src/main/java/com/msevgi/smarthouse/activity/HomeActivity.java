@@ -1,5 +1,5 @@
 
-package com.msevgi.smarthouse;
+package com.msevgi.smarthouse.activity;
 
 import android.app.Activity;
 import android.os.AsyncTask;
@@ -11,10 +11,11 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.msevgi.smarthouse.R;
 
 import java.io.IOException;
 
-public class MyActivity extends Activity implements OnClickListener {
+public class HomeActivity extends Activity implements OnClickListener {
 
    Button               btnRegId;
    EditText             etRegId;
@@ -25,7 +26,7 @@ public class MyActivity extends Activity implements OnClickListener {
    @Override
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
-      setContentView(R.layout.activity_my);
+      setContentView(R.layout.layout_home);
 
       btnRegId = (Button) findViewById(R.id.btnGetRegId);
       etRegId = (EditText) findViewById(R.id.etRegId);
