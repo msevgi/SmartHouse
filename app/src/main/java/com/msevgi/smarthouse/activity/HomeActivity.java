@@ -19,7 +19,7 @@ public final class HomeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
     }
 
-    @OnClick(R.id.btnGetRegId)
+    @OnClick(R.id.activity_home_button)
     protected void onRegisterGcmClicked() {
         GcmRegisterAsyncTask mTask = new GcmRegisterAsyncTask(this);
         mTask.execute();
