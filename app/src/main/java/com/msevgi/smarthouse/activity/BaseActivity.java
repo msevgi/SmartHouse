@@ -1,6 +1,8 @@
 package com.msevgi.smarthouse.activity;
 
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBarActivity;
 
 import com.msevgi.smarthouse.provider.BusProvider;
@@ -8,8 +10,8 @@ import com.squareup.otto.Bus;
 
 import butterknife.ButterKnife;
 
+abstract class BaseActivity extends ActionBarActivity {
 
-public abstract class BaseActionBarActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +24,8 @@ public abstract class BaseActionBarActivity extends ActionBarActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
+        ButterKnife.reset(this);
         getBus().unregister(this);
     }
 
@@ -30,5 +34,8 @@ public abstract class BaseActionBarActivity extends ActionBarActivity {
         return BusProvider.getInstance();
     }
 
-    protected abstract int getLayoutResource();
+    protected abstract
+    @NonNull
+    @LayoutRes
+    int getLayoutResource();
 }

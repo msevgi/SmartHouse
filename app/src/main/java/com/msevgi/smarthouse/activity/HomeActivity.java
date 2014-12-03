@@ -15,7 +15,7 @@ import java.io.IOException;
 
 import butterknife.InjectView;
 
-public class HomeActivity extends BaseActionBarActivity implements OnClickListener {
+public class HomeActivity extends BaseActivity implements OnClickListener {
 
     @InjectView(R.id.btnGetRegId)
     Button btnRegId;

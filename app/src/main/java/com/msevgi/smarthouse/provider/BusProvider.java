@@ -1,12 +1,17 @@
 package com.msevgi.smarthouse.provider;
+
 import com.squareup.otto.Bus;
+import com.squareup.otto.ThreadEnforcer;
 
 public final class BusProvider {
 
-    private static Bus bus = new Bus();
+    private static Bus sBus;
 
     public static Bus getInstance() {
-        return bus;
+        if (sBus == null)
+            sBus = new Bus(ThreadEnforcer.ANY);
+
+        return sBus;
     }
 
     private BusProvider() {
