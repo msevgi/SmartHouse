@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.msevgi.smarthouse.receiver.GcmBroadcastReceiver;
 
 public class GcmMessageHandler extends IntentService {
 
