@@ -2,32 +2,36 @@ package com.msevgi.smarthouse.task;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.msevgi.smarthouse.constant.ApplicationConstants;
 
 import java.io.IOException;
 
-public final class GcmRegisterAsyncTask extends AsyncTask<Void, Void, Boolean> {
+public final class GcmRegisterAsyncTask extends AsyncTask<Void, Void, String> {
 
     private Context mContext;
     private GoogleCloudMessaging mGoogleCloudMessaging;
 
     public GcmRegisterAsyncTask(Context context) {
         mContext = context;
+        mGoogleCloudMessaging = GoogleCloudMessaging.getInstance(mContext);
     }
 
     @Override
-    protected Boolean doInBackground(Void... params) {
+    protected String doInBackground(Void... params) {
         try {
-            mGoogleCloudMessaging = GoogleCloudMessaging.getInstance(mContext);
-            mGoogleCloudMessaging.register(ApplicationConstants.PROJECT_NUMBER);
+            return mGoogleCloudMessaging.register(ApplicationConstants.PROJECT_NUMBER);
         } catch (IOException e) {
             e.printStackTrace();
-            return false;
+            return "";
         }
+    }
 
-
-        return true;
+    @Override
+    protected void onPostExecute(String registrationId) {
+        Log.i("GCM", registrationId);
+        super.onPostExecute(registrationId);
     }
 }
