@@ -25,13 +25,15 @@ public final class GcmRegisterAsyncTask extends AsyncTask<Void, Void, String> {
             return mGoogleCloudMessaging.register(ApplicationConstants.PROJECT_NUMBER);
         } catch (IOException e) {
             e.printStackTrace();
-            return "";
+            return null;
         }
     }
 
     @Override
     protected void onPostExecute(String registrationId) {
+        if (registrationId == null)
+            return;
+
         Log.i("GCM", registrationId);
-        super.onPostExecute(registrationId);
     }
 }

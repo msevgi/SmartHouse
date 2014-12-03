@@ -14,6 +14,4 @@ public final class BusProvider {
         return sBus;
     }
 
-    private BusProvider() {
-    }
 }
