@@ -8,7 +8,7 @@ import android.support.v4.content.WakefulBroadcastReceiver;
 
 import com.msevgi.smarthouse.GcmMessageHandler;
 
-public class GcmBroadcastReceiver extends WakefulBroadcastReceiver {
+public final class GcmBroadcastReceiver extends WakefulBroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {

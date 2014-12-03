@@ -6,7 +6,7 @@ import android.support.v4.widget.CursorAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class HomeListAdapter extends CursorAdapter {
+public final class HomeListAdapter extends CursorAdapter {
 
     public HomeListAdapter(Context context, Cursor c) {
         super(context, c);
