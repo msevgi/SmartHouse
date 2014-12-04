@@ -19,7 +19,7 @@
     </android.support.v7.widget.CardView>
 
     <TextView
-        android:id="@+id/cell_bell_textivew"
+        android:id="@+id/cell_bell_textview"
         android:layout_width="match_parent"
         android:layout_gravity="bottom"
         android:layout_height="100dp"/>
