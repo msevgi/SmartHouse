@@ -11,6 +11,7 @@
     <permission
         android:name="com.msevgi.smarthouse.permission.C2D_MESSAGE"
         android:protectionLevel="signature"/>
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -37,11 +38,20 @@
                 <category android:name="com.hmkcode.android.gcm"/>
             </intent-filter>
         </receiver>
-        <service android:name=".GcmMessageHandler"/>
 
+        <!-- Bell Provider !-->
+        <provider
+            android:authorities="com.msevgi.smarthouse"
+            android:name=".content.BellContentProvider"/>
+
+        <!-- Gcm Service !-->
+        <service android:name=".handler.GcmMessageHandler"/>
+
+        <!-- Gcm Version Metadata !-->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="55000"/>
+
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.msevgi.smarthouse;
+package com.msevgi.smarthouse.handler;
 
 import android.app.IntentService;
 import android.content.Intent;

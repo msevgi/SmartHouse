@@ -1,17 +1,27 @@
 package com.msevgi.smarthouse.content;
 
+import android.net.Uri;
+
 import de.triplet.simpleprovider.AbstractProvider;
 import de.triplet.simpleprovider.Column;
 import de.triplet.simpleprovider.Table;
 
 public final class BellContentProvider extends AbstractProvider {
 
-    public static final String AUTHORITY = "com.msevgi.smarthouse";
-    public static final String URI = "content://com.msevgi.smarthouse/bells";
+    private static final String AUTHORITY = "com.msevgi.smarthouse";
+    private static final String URI_STRING = "content://com.msevgi.smarthouse/bells";
+    private static Uri mUri;
 
     @Override
     protected String getAuthority() {
         return AUTHORITY;
+    }
+
+    public static Uri getUri() {
+        if (mUri == null)
+            mUri = Uri.parse(URI_STRING);
+
+        return mUri;
     }
 
     @Table

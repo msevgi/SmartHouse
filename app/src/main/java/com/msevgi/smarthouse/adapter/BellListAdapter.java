@@ -6,9 +6,9 @@ import android.support.v4.widget.CursorAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
-public final class HomeListAdapter extends CursorAdapter {
+public final class BellListAdapter extends CursorAdapter {
 
-    public HomeListAdapter(Context context, Cursor c) {
+    public BellListAdapter(Context context, Cursor c) {
         super(context, c);
     }
 
@@ -21,4 +21,5 @@ public final class HomeListAdapter extends CursorAdapter {
     public void bindView(View view, Context context, Cursor cursor) {
 
     }
+
 }

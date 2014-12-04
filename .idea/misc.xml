@@ -2,8 +2,10 @@
 <project version="4">
   <component name="EclipseCodeFormatter">
     <option name="defaultSettings" value="true" />
-    <option name="id" value="1415222997294" />
+    <option name="id" value="1394452801989" />
     <option name="name" value="default" />
+    <option name="pathToConfigFileJava" value="D:/Important Files/Develop/MCP_Format_Profile v10.xml" />
+    <option name="selectedJavaProfile" value="MCP" />
   </component>
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
@@ -93,7 +95,7 @@
       </profile-state>
     </entry>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="1.7" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="masterDetails">

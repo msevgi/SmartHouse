@@ -4,9 +4,9 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.support.v4.app.NotificationCompat;
 
-public final class NotificationFacade {
+import com.msevgi.smarthouse.provider.NotificationIdProvider;
 
-    private static final int NOTIFICATION_ID = 001;
+public final class NotificationFacade {
 
     private Context mContext;
     private NotificationCompat.Builder mBuilder;
@@ -23,6 +23,7 @@ public final class NotificationFacade {
     }
 
     public void show() {
-        mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
+        int mNotificationId = NotificationIdProvider.getNotificationId();
+        mNotificationManager.notify(mNotificationId, mBuilder.build());
     }
 }
