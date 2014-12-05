@@ -1,26 +1,22 @@
 package com.msevgi.smarthouse.activity;
 
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
-import android.widget.ListView;
+import android.support.annotation.NonNull;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.widget.Toast;
 
 import com.msevgi.smarthouse.R;
-import com.msevgi.smarthouse.adapter.BellListAdapter;
-import com.msevgi.smarthouse.content.BellContentProvider;
-import com.msevgi.smarthouse.task.GcmRegisterAsyncTask;
+import com.msevgi.smarthouse.fragment.NavigationDrawerFragment;
+import com.msevgi.smarthouse.interfaces.NavigationDrawerCallbacks;
 
-import butterknife.InjectView;
-import butterknife.OnClick;
+public final class HomeActivity extends BaseActivity implements NavigationDrawerCallbacks {
 
-public final class HomeActivity extends BaseActivity {
+    private Toolbar mToolbar;
+    private NavigationDrawerFragment mNavigationDrawerFragment;
 
-    @InjectView(R.id.activity_home_listview)
-    protected ListView mListView;
-
-    private BellListAdapter mAdapter;
-
+    @NonNull
     @Override
     protected int getLayoutResource() {
         return R.layout.layout_home;
@@ -29,23 +25,31 @@ public final class HomeActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        Uri mUri = BellContentProvider.getUri();
-        Cursor mCursor = getContentResolver().query(mUri, null, null, null, null);
-        mAdapter = new BellListAdapter(this, mCursor);
-        mListView.setAdapter(mAdapter);
-
-        ContentValues mContentValues = new ContentValues();
-        mContentValues.put(BellContentProvider.Bell.KEY_TIME, "Zaman");
-        getContentResolver().insert(mUri, mContentValues);
+        mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.fragment_drawer);
+        mNavigationDrawerFragment.setup(R.id.fragment_drawer, (DrawerLayout) findViewById(R.id.drawer), mToolbar);
     }
 
-    @OnClick(R.id.activity_home_button)
-    protected void onRegisterGcmClicked() {
-        GcmRegisterAsyncTask mTask = new GcmRegisterAsyncTask(this);
-        mTask.execute();
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
+    @Override
+    public void onNavigationDrawerItemSelected(int position) {
+        Toast.makeText(this, "Menu item selected -> " + position, Toast.LENGTH_SHORT).show();
+    }
 
+    @Override
+    public void onBackPressed() {
+        if (mNavigationDrawerFragment.isDrawerOpen())
+            mNavigationDrawerFragment.closeDrawer();
+        else
+            super.onBackPressed();
     }
 
 }
