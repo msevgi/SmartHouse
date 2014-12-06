@@ -8,12 +8,13 @@ import android.view.Menu;
 import android.widget.Toast;
 
 import com.msevgi.smarthouse.R;
+import com.msevgi.smarthouse.event.NavigationItemSelectEvent;
 import com.msevgi.smarthouse.fragment.NavigationDrawerFragment;
-import com.msevgi.smarthouse.interfaces.NavigationDrawerCallbacks;
+import com.squareup.otto.Subscribe;
 
 import butterknife.InjectView;
 
-public final class HomeActivity extends BaseActivity implements NavigationDrawerCallbacks {
+public final class HomeActivity extends BaseActivity {
 
     @InjectView(R.id.activity_home_toolbar)
     protected Toolbar mToolbar;
@@ -46,9 +47,9 @@ public final class HomeActivity extends BaseActivity implements NavigationDrawer
         return super.onCreateOptionsMenu(menu);
     }
 
-    @Override
-    public void onNavigationDrawerItemSelected(int position) {
-        Toast.makeText(this, "Menu item selected -> " + position, Toast.LENGTH_SHORT).show();
+    @Subscribe
+    public void onNavigationDrawerItemSelected(NavigationItemSelectEvent event){
+        Toast.makeText(this, "Menu item selected -> " + event.getPosition(), Toast.LENGTH_SHORT).show();
     }
 
     @Override

@@ -9,28 +9,20 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.msevgi.smarthouse.R;
-import com.msevgi.smarthouse.interfaces.NavigationDrawerCallbacks;
+import com.msevgi.smarthouse.event.NavigationItemSelectEvent;
 import com.msevgi.smarthouse.model.NavigationItem;
+import com.msevgi.smarthouse.provider.BusProvider;
 
 import java.util.List;
 
 public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDrawerAdapter.ViewHolder> {
 
     private List<NavigationItem> mData;
-    private NavigationDrawerCallbacks mNavigationDrawerCallbacks;
     private int mSelectedPosition;
     private int mTouchedPosition = -1;
 
     public NavigationDrawerAdapter(List<NavigationItem> data) {
         mData = data;
-    }
-
-    public NavigationDrawerCallbacks getNavigationDrawerCallbacks() {
-        return mNavigationDrawerCallbacks;
-    }
-
-    public void setNavigationDrawerCallbacks(NavigationDrawerCallbacks navigationDrawerCallbacks) {
-        mNavigationDrawerCallbacks = navigationDrawerCallbacks;
     }
 
     @Override
@@ -40,9 +32,9 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
     }
 
     @Override
-    public void onBindViewHolder(NavigationDrawerAdapter.ViewHolder viewHolder, final int i) {
-        viewHolder.textView.setText(mData.get(i).getText());
-        viewHolder.textView.setCompoundDrawablesWithIntrinsicBounds(mData.get(i).getDrawable(), null, null, null);
+    public void onBindViewHolder(NavigationDrawerAdapter.ViewHolder viewHolder, final int position) {
+        viewHolder.textView.setText(mData.get(position).getText());
+        viewHolder.textView.setCompoundDrawablesWithIntrinsicBounds(mData.get(position).getDrawable(), null, null, null);
 
         viewHolder.itemView.setOnTouchListener(new View.OnTouchListener() {
                                                    @Override
@@ -50,7 +42,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
 
                                                        switch (event.getAction()) {
                                                            case MotionEvent.ACTION_DOWN:
-                                                               touchPosition(i);
+                                                               touchPosition(position);
                                                                return false;
                                                            case MotionEvent.ACTION_CANCEL:
                                                                touchPosition(-1);
@@ -68,14 +60,15 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                                                    @Override
                                                    public void onClick(View v) {
-                                                       if (mNavigationDrawerCallbacks != null)
-                                                           mNavigationDrawerCallbacks.onNavigationDrawerItemSelected(i);
+                                                       NavigationItemSelectEvent mEvent = new NavigationItemSelectEvent();
+                                                       mEvent.setPosition(position);
+                                                       BusProvider.getInstance().post(mEvent);
                                                    }
                                                }
         );
 
         //TODO: selected menu position, change layout accordingly
-        if (mSelectedPosition == i || mTouchedPosition == i) {
+        if (mSelectedPosition == position || mTouchedPosition == position) {
             viewHolder.itemView.setBackgroundColor(viewHolder.itemView.getContext().getResources().getColor(R.color.selected_gray));
         } else {
             viewHolder.itemView.setBackgroundColor(Color.TRANSPARENT);
