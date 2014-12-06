@@ -11,9 +11,16 @@ import com.msevgi.smarthouse.R;
 import com.msevgi.smarthouse.fragment.NavigationDrawerFragment;
 import com.msevgi.smarthouse.interfaces.NavigationDrawerCallbacks;
 
+import butterknife.InjectView;
+
 public final class HomeActivity extends BaseActivity implements NavigationDrawerCallbacks {
 
-    private Toolbar mToolbar;
+    @InjectView(R.id.activity_home_toolbar)
+    protected Toolbar mToolbar;
+
+    @InjectView(R.id.activity_home_drawerlayout)
+    protected DrawerLayout mDrawerLayout;
+
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
     @NonNull
@@ -25,17 +32,17 @@ public final class HomeActivity extends BaseActivity implements NavigationDrawer
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
+        mToolbar = (Toolbar) findViewById(R.id.activity_home_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.fragment_drawer);
-        mNavigationDrawerFragment.setup(R.id.fragment_drawer, (DrawerLayout) findViewById(R.id.drawer), mToolbar);
+        mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.activity_home_fragment_drawer);
+        mNavigationDrawerFragment.setup(R.id.activity_home_fragment_drawer, mDrawerLayout, mToolbar);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
