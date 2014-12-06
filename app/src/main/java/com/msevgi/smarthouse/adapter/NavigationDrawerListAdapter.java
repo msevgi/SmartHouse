@@ -15,24 +15,24 @@ import com.msevgi.smarthouse.provider.BusProvider;
 
 import java.util.List;
 
-public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDrawerAdapter.ViewHolder> {
+public final class NavigationDrawerListAdapter extends RecyclerView.Adapter<NavigationDrawerListAdapter.ViewHolder> {
 
     private List<NavigationItem> mData;
     private int mSelectedPosition;
     private int mTouchedPosition = -1;
 
-    public NavigationDrawerAdapter(List<NavigationItem> data) {
+    public NavigationDrawerListAdapter(List<NavigationItem> data) {
         mData = data;
     }
 
     @Override
-    public NavigationDrawerAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public NavigationDrawerListAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.drawer_row, viewGroup, false);
         return new ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(NavigationDrawerAdapter.ViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(NavigationDrawerListAdapter.ViewHolder viewHolder, final int position) {
         viewHolder.textView.setText(mData.get(position).getText());
         viewHolder.textView.setCompoundDrawablesWithIntrinsicBounds(mData.get(position).getDrawable(), null, null, null);
 

@@ -2,7 +2,7 @@ package com.msevgi.smarthouse.model;
 
 import android.graphics.drawable.Drawable;
 
-public class NavigationItem {
+public final class NavigationItem {
     private String mText;
     private Drawable mDrawable;
 

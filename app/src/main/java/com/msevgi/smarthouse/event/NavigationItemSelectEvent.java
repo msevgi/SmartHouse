@@ -1,6 +1,6 @@
 package com.msevgi.smarthouse.event;
 
-public class NavigationItemSelectEvent {
+public final class NavigationItemSelectEvent {
     private int position;
 
     public NavigationItemSelectEvent() {

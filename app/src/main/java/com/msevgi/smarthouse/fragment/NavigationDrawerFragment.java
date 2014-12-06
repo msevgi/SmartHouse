@@ -13,10 +13,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.msevgi.smarthouse.R;
-import com.msevgi.smarthouse.adapter.NavigationDrawerAdapter;
+import com.msevgi.smarthouse.adapter.NavigationDrawerListAdapter;
 import com.msevgi.smarthouse.event.NavigationItemSelectEvent;
 import com.msevgi.smarthouse.model.NavigationItem;
-import com.msevgi.smarthouse.provider.BusProvider;
 import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
@@ -53,7 +52,7 @@ public final class NavigationDrawerFragment extends BaseFragment {
         mDrawerList.setHasFixedSize(true);
 
         List<NavigationItem> mNavigationItems = getMenu();
-        NavigationDrawerAdapter mAdapter = new NavigationDrawerAdapter(mNavigationItems);
+        NavigationDrawerListAdapter mAdapter = new NavigationDrawerListAdapter(mNavigationItems);
         mDrawerList.setAdapter(mAdapter);
         selectItem(mCurrentSelectedPosition);
         super.onViewCreated(view, savedInstanceState);
@@ -135,7 +134,7 @@ public final class NavigationDrawerFragment extends BaseFragment {
         if (mDrawerLayout != null)
             mDrawerLayout.closeDrawer(mFragmentContainerView);
 
-        ((NavigationDrawerAdapter) mDrawerList.getAdapter()).selectPosition(position);
+        ((NavigationDrawerListAdapter) mDrawerList.getAdapter()).selectPosition(position);
     }
 
     public boolean isDrawerOpen() {

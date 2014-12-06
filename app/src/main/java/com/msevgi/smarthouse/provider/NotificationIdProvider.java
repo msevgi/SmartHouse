@@ -1,6 +1,6 @@
 package com.msevgi.smarthouse.provider;
 
-public class NotificationIdProvider {
+public final class NotificationIdProvider {
 
     private static int NOTIFICATION_ID = 4321;
 
