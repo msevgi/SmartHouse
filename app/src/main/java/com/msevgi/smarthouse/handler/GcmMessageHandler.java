@@ -43,13 +43,6 @@ public final class GcmMessageHandler extends IntentService {
         Bundle mExtras = intent.getExtras();
 
         mId = mExtras.getString("id");
-        NotificationFacade mNotificationFacade = new NotificationFacade(this);
-        mNotificationFacade
-                .getBuilder()
-                .setContentTitle("Door has ring!")
-                .setContentText("The id of photo is " + mId)
-                .setSmallIcon(R.drawable.ic_launcher);
-        mNotificationFacade.show();
 
         RestAdapter mRestAdapter = new RestAdapter
                 .Builder()
@@ -74,6 +67,15 @@ public final class GcmMessageHandler extends IntentService {
 
         Uri mBellUri = BellContentProvider.getUri();
         getContentResolver().insert(mBellUri, mBell.toContentValues());
+
+        NotificationFacade mNotificationFacade = new NotificationFacade(this);
+        mNotificationFacade
+                .getBuilder()
+                .setContentTitle("Door has ring!")
+                .setContentText("The id of photo is " + mId)
+                .setSmallIcon(R.drawable.ic_launcher)
+                .setLargeIcon(mBitmap);
+        mNotificationFacade.show();
 
         Log.i("GCM", "Received : " + mExtras.getString("id"));
         GcmBroadcastReceiver.completeWakefulIntent(intent);

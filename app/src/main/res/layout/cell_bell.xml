@@ -9,21 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/cell_bell_time_textview"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal">
-
-        <com.msevgi.smarthouse.view.ResponseButton
-            android:id="@+id/cell_bell_response_button"
-            android:layout_width="50dp"
-            android:layout_height="50dp"/>
-
-        <TextView
-            android:id="@+id/cell_bell_time_textview"
-            android:layout_width="match_parent"
-            android:layout_gravity="bottom"
-            android:layout_height="100dp"/>
-    </LinearLayout>
+        android:layout_height="100dp"/>
 
 </LinearLayout>

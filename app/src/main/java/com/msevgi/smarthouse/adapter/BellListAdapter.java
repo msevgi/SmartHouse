@@ -13,13 +13,9 @@ import android.widget.TextView;
 
 import com.msevgi.smarthouse.R;
 import com.msevgi.smarthouse.content.BellContentProvider;
-import com.msevgi.smarthouse.event.ResponseButtonClickEvent;
-import com.msevgi.smarthouse.provider.BusProvider;
-import com.msevgi.smarthouse.view.ResponseButton;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import butterknife.OnClick;
 
 public final class BellListAdapter extends CursorAdapter {
 
@@ -53,7 +49,6 @@ public final class BellListAdapter extends CursorAdapter {
 
         byte[] mByteArray = cursor.getBlob(mBitmapIndex);
         Bitmap mBitmap = BitmapFactory.decodeByteArray(mByteArray, 0, mByteArray.length);
-        mViewHolder.mResponseButton.setCursor(cursor);
         mViewHolder.mImageView.setImageBitmap(mBitmap);
     }
 
@@ -65,20 +60,8 @@ public final class BellListAdapter extends CursorAdapter {
         @InjectView(R.id.cell_bell_time_textview)
         TextView mDateTextView;
 
-        @InjectView(R.id.cell_bell_response_button)
-        ResponseButton mResponseButton;
-
         public ViewHolder(View view) {
             ButterKnife.inject(this, view);
-        }
-
-        @OnClick(R.id.cell_bell_response_button)
-        protected void onResponseButtonClicked(ResponseButton button) {
-            Cursor mCursor = button.getCursor();
-
-            ResponseButtonClickEvent mEvent = new ResponseButtonClickEvent();
-            mEvent.setCursor(mCursor);
-            BusProvider.getInstance().post(mEvent);
         }
     }
 
