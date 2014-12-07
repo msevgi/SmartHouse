@@ -1,57 +1,63 @@
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.msevgi.smarthouse">
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.msevgi.smarthouse" >
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
-    <uses-permission android:name="com.msevgi.smarthouse.permission.C2D_MESSAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="com.msevgi.smarthouse.permission.C2D_MESSAGE" />
 
     <permission
         android:name="com.msevgi.smarthouse.permission.C2D_MESSAGE"
-        android:protectionLevel="signature"/>
+        android:protectionLevel="signature" />
 
     <application
+        android:name="com.msevgi.smarthouse.application.SmartHouseApplication"
         android:allowBackup="false"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:name=".application.SmartHouseApplication"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
 
-        <!-- Home Activity !-->
+        <!-- Home Activity ! -->
         <activity
-            android:name=".activity.HomeActivity"
-            android:label="@string/app_name">
+            android:name="com.msevgi.smarthouse.activity.HomeActivity"
+            android:label="@string/app_name" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <!-- GCM Broadcast Receiver !-->
+        <!-- GCM Broadcast Receiver ! -->
         <receiver
-            android:name=".receiver.GcmBroadcastReceiver"
-            android:permission="com.google.android.c2dm.permission.SEND">
+            android:name="com.msevgi.smarthouse.receiver.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
-                <category android:name="com.hmkcode.android.gcm"/>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
+                <category android:name="com.hmkcode.android.gcm" />
             </intent-filter>
         </receiver>
 
-        <!-- Bell Provider !-->
+        <!-- Bell Provider ! -->
         <provider
-            android:authorities="com.msevgi.smarthouse"
-            android:name=".content.BellContentProvider"/>
+            android:name="com.msevgi.smarthouse.content.BellContentProvider"
+            android:authorities="com.msevgi.smarthouse" />
 
-        <!-- Gcm Service !-->
-        <service android:name=".handler.GcmMessageHandler"/>
+        <!-- Gcm Service ! -->
+        <service android:name="com.msevgi.smarthouse.handler.GcmMessageHandler" />
 
-        <!-- Gcm Version Metadata !-->
+        <!-- Gcm Version Metadata ! -->
         <meta-data
             android:name="com.google.android.gms.version"
-            android:value="55000"/>
+            android:value="55000" />
 
+        <activity
+            android:name="com.msevgi.smarthouse.activity.SpeechActivity"
+            android:label="@string/title_activity_speech" >
+        </activity>
     </application>
 
 </manifest>

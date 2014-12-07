@@ -1,0 +1,45 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.msevgi.smarthouse.activity.SpeechActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/activity_speech_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="112dp"
+        android:background="#9E9E9E"
+        style="@style/style_toolbar"/>
+
+    <com.melnykov.fab.FloatingActionButton
+        android:id="@+id/activity_speech_accept_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_check"
+        android:layout_below="@+id/activity_speech_toolbar"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="-26dp"
+        android:transitionName="button"
+        fab:fab_colorNormal="#8BC34A"
+        fab:fab_colorPressed="#689F38"
+        fab:fab_colorRipple="#00E676"/>
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/activity_speech_reponse_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Text to be speeched there."
+        android:text=""
+        app:baseColor="@android:color/black"
+        app:floatingLabel="highlight"
+        app:maxCharacters="30"
+        app:primaryColor="@android:color/black"
+        android:layout_below="@+id/activity_speech_accept_button"
+        android:layout_margin="16dp"/>
+
+</RelativeLayout>

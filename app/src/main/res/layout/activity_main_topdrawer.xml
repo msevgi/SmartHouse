@@ -12,7 +12,7 @@
 
         <include
             android:id="@+id/activity_home_toolbar"
-            layout="@layout/toolbar_default"
+            layout="@layout/segment_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 

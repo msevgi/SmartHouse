@@ -27,7 +27,7 @@ public final class NavigationDrawerListAdapter extends RecyclerView.Adapter<Navi
 
     @Override
     public NavigationDrawerListAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.drawer_row, viewGroup, false);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cell_drawer, viewGroup, false);
         return new ViewHolder(v);
     }
 
