@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.widget.Toast;
 
 import com.msevgi.smarthouse.R;
 import com.msevgi.smarthouse.event.NavigationItemSelectEvent;
@@ -27,6 +26,7 @@ public final class HomeActivity extends BaseActivity {
     protected DrawerLayout mDrawerLayout;
 
     private NavigationDrawerFragment mNavigationDrawerFragment;
+    private int mCurrentPosition = -1;
 
     @NonNull
     @Override
@@ -56,6 +56,9 @@ public final class HomeActivity extends BaseActivity {
     @Subscribe
     public void onNavigationDrawerItemSelected(NavigationItemSelectEvent event) {
         int position = event.getPosition();
+        if (mCurrentPosition == position)
+            return;
+
         switch (position) {
             case BellListFragment.POSITION:
                 getFragmentManager()
@@ -66,7 +69,7 @@ public final class HomeActivity extends BaseActivity {
                 break;
         }
 
-        Toast.makeText(this, "Menu item selected -> " + position, Toast.LENGTH_SHORT).show();
+        mCurrentPosition = position;
     }
 
     @Override
