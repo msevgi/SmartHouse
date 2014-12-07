@@ -37,12 +37,6 @@ public final class BellListFragment extends BaseFragment {
         BellListAdapter mAdapter = new BellListAdapter(getContext(), mCursor);
         mListView.setAdapter(mAdapter);
 
-        BellContentProvider.Bell mBell = new BellContentProvider.Bell();
-        mBell.setTime("Test");
-        Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
-        mBell.setBitmap(bm);
-        getActivity().getContentResolver().insert(mBellUri, mBell.toContentValues());
-
         super.onViewCreated(view, savedInstanceState);
     }
 

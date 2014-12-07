@@ -34,12 +34,16 @@ public final class BellContentProvider extends AbstractProvider {
         @Column(value = Column.FieldType.INTEGER, primaryKey = true)
         public static final String KEY_ID = "_id";
 
+        @Column(value = Column.FieldType.INTEGER)
+        public static final String PHOTO_ID = "photo_id";
+
         @Column(Column.FieldType.TEXT)
         public static final String KEY_TIME = "time";
 
         @Column(Column.FieldType.BLOB)
         public static final String KEY_BITMAP = "bitmap";
 
+        private String mPhotoId;
         private String mTime;
         private Bitmap mBitmap;
 
@@ -57,6 +61,14 @@ public final class BellContentProvider extends AbstractProvider {
 
         public void setBitmap(Bitmap bitmap) {
             mBitmap = bitmap;
+        }
+
+        public String getPhotoId() {
+            return mPhotoId;
+        }
+
+        public void setPhotoId(String photoId) {
+            this.mPhotoId = photoId;
         }
 
         public byte[] getByteArray() {

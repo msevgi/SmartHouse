@@ -2,6 +2,8 @@ package com.msevgi.smarthouse.adapter;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,12 +25,14 @@ public final class BellListAdapter extends CursorAdapter {
 
     private LayoutInflater mInflater;
     private int mTimeIndex;
+    private int mBitmapIndex;
 
     public BellListAdapter(Context context, Cursor cursor) {
         super(context, cursor);
         mInflater = LayoutInflater.from(context);
 
         mTimeIndex = cursor.getColumnIndex(BellContentProvider.Bell.KEY_TIME);
+        mBitmapIndex = cursor.getColumnIndex(BellContentProvider.Bell.KEY_BITMAP);
     }
 
     @Override
@@ -47,7 +51,10 @@ public final class BellListAdapter extends CursorAdapter {
         String mTime = cursor.getString(mTimeIndex);
         mViewHolder.mDateTextView.setText(mTime);
 
+        byte[] mByteArray = cursor.getBlob(mBitmapIndex);
+        Bitmap mBitmap = BitmapFactory.decodeByteArray(mByteArray, 0, mByteArray.length);
         mViewHolder.mResponseButton.setCursor(cursor);
+        mViewHolder.mImageView.setImageBitmap(mBitmap);
     }
 
     protected static class ViewHolder {

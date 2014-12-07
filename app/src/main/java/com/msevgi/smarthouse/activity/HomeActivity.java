@@ -12,6 +12,7 @@ import com.msevgi.smarthouse.R;
 import com.msevgi.smarthouse.event.NavigationItemSelectEvent;
 import com.msevgi.smarthouse.fragment.BellListFragment;
 import com.msevgi.smarthouse.fragment.NavigationDrawerFragment;
+import com.msevgi.smarthouse.task.GcmRegisterAsyncTask;
 import com.squareup.otto.Subscribe;
 
 import butterknife.InjectView;
@@ -41,6 +42,8 @@ public final class HomeActivity extends BaseActivity {
 
         mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.activity_home_fragment_drawer);
         mNavigationDrawerFragment.setup(R.id.activity_home_fragment_drawer, mDrawerLayout, mToolbar);
+
+        new GcmRegisterAsyncTask(this).execute();
     }
 
     @Override
