@@ -11,16 +11,15 @@ import android.util.Log;
 
 import com.badoo.mobile.util.WeakHandler;
 import com.msevgi.smarthouse.R;
-import com.msevgi.smarthouse.constant.ApplicationConstants;
 import com.msevgi.smarthouse.content.BellContentProvider;
 import com.msevgi.smarthouse.helper.NotificationFacade;
 import com.msevgi.smarthouse.interfaces.PhotoRestInterface;
+import com.msevgi.smarthouse.provider.RestAdapterProvider;
 import com.msevgi.smarthouse.receiver.GcmBroadcastReceiver;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-import retrofit.RestAdapter;
 import retrofit.client.Response;
 
 public final class GcmMessageHandler extends IntentService {
@@ -44,15 +43,10 @@ public final class GcmMessageHandler extends IntentService {
 
         mId = mExtras.getString("id");
 
-        RestAdapter mRestAdapter = new RestAdapter
-                .Builder()
-                .setEndpoint(ApplicationConstants.API_URL)
-                .build();
-
         // Create an instance of our GitHub API interface.
         Bitmap mBitmap = null;
         try {
-            PhotoRestInterface mRestInterface = mRestAdapter.create(PhotoRestInterface.class);
+            PhotoRestInterface mRestInterface = RestAdapterProvider.getInstance().create(PhotoRestInterface.class);
             Response mResponse = mRestInterface.getByteArray(mId);
             InputStream mInputStream = mResponse.getBody().in();
             mBitmap = BitmapFactory.decodeStream(mInputStream);
