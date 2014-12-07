@@ -67,7 +67,7 @@ public final class GcmMessageHandler extends IntentService {
                 .getBuilder()
                 .setContentTitle("Door has ring!")
                 .setContentText("The id of photo is " + mId)
-                .setSmallIcon(R.drawable.ic_launcher)
+                .setSmallIcon(R.drawable.ic_home)
                 .setLargeIcon(mBitmap);
         mNotificationFacade.show();
 

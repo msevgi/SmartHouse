@@ -37,7 +37,8 @@ public final class BellListFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         Uri mBellUri = SmartHouseContentProvider.getBellUri();
-        Cursor mCursor = getActivity().getContentResolver().query(mBellUri, null, null, null, null);
+        String mReverseOrder = SmartHouseContentProvider.Bell.KEY_ID + " DESC";
+        Cursor mCursor = getActivity().getContentResolver().query(mBellUri, null, null, null, mReverseOrder);
         BellListAdapter mAdapter = new BellListAdapter(getContext(), mCursor);
         mListView.setAdapter(mAdapter);
 
