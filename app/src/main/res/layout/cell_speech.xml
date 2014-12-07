@@ -1,0 +1,9 @@
+<com.msevgi.smarthouse.view.SpeechTextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cell_speech_textview"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:gravity="center_vertical"
+    android:paddingLeft="24dp"
+    android:textColor="@android:color/black"
+    android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>

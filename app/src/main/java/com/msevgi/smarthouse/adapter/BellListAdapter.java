@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.msevgi.smarthouse.R;
-import com.msevgi.smarthouse.content.BellContentProvider;
+import com.msevgi.smarthouse.content.SmartHouseContentProvider;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -27,8 +27,8 @@ public final class BellListAdapter extends CursorAdapter {
         super(context, cursor);
         mInflater = LayoutInflater.from(context);
 
-        mTimeIndex = cursor.getColumnIndex(BellContentProvider.Bell.KEY_TIME);
-        mBitmapIndex = cursor.getColumnIndex(BellContentProvider.Bell.KEY_BITMAP);
+        mTimeIndex = cursor.getColumnIndex(SmartHouseContentProvider.Bell.KEY_TIME);
+        mBitmapIndex = cursor.getColumnIndex(SmartHouseContentProvider.Bell.KEY_BITMAP);
     }
 
     @Override

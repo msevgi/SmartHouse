@@ -11,7 +11,7 @@ import android.util.Log;
 
 import com.badoo.mobile.util.WeakHandler;
 import com.msevgi.smarthouse.R;
-import com.msevgi.smarthouse.content.BellContentProvider;
+import com.msevgi.smarthouse.content.SmartHouseContentProvider;
 import com.msevgi.smarthouse.helper.NotificationFacade;
 import com.msevgi.smarthouse.interfaces.PhotoRestInterface;
 import com.msevgi.smarthouse.provider.RestAdapterProvider;
@@ -54,12 +54,12 @@ public final class GcmMessageHandler extends IntentService {
             Log.i("GCM", "Received : Corrupted Image Data");
         }
 
-        BellContentProvider.Bell mBell = new BellContentProvider.Bell();
+        SmartHouseContentProvider.Bell mBell = new SmartHouseContentProvider.Bell();
         mBell.setTime(SystemClock.currentThreadTimeMillis() + "");
         mBell.setPhotoId(mId);
         mBell.setBitmap(mBitmap);
 
-        Uri mBellUri = BellContentProvider.getUri();
+        Uri mBellUri = SmartHouseContentProvider.getBellUri();
         getContentResolver().insert(mBellUri, mBell.toContentValues());
 
         NotificationFacade mNotificationFacade = new NotificationFacade(this);

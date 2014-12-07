@@ -45,9 +45,9 @@
             </intent-filter>
         </receiver>
 
-        <!-- Bell Provider ! -->
+        <!-- Content Provider ! -->
         <provider
-            android:name="com.msevgi.smarthouse.content.BellContentProvider"
+            android:name=".content.SmartHouseContentProvider"
             android:authorities="com.msevgi.smarthouse"/>
 
         <!-- Gcm Service ! -->

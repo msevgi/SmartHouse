@@ -1,17 +1,24 @@
 package com.msevgi.smarthouse.activity;
 
+import android.database.Cursor;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 import com.msevgi.smarthouse.R;
+import com.msevgi.smarthouse.adapter.SpeechListAdapter;
 import com.msevgi.smarthouse.bean.SpeechRequestBean;
 import com.msevgi.smarthouse.bean.SpeechResponseBean;
+import com.msevgi.smarthouse.content.SmartHouseContentProvider;
+import com.msevgi.smarthouse.event.SpeechItemSelectEvent;
 import com.msevgi.smarthouse.interfaces.SpeechRestInterface;
 import com.msevgi.smarthouse.provider.RestAdapterProvider;
 import com.rengwuxian.materialedittext.MaterialEditText;
+import com.squareup.otto.Subscribe;
 
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -27,6 +34,9 @@ public final class SpeechActivity extends BaseActivity implements Callback<Speec
     @InjectView(R.id.activity_speech_toolbar)
     protected Toolbar mToolbar;
 
+    @InjectView(R.id.activity_speech_listview)
+    protected ListView mListView;
+
     @NonNull
     @Override
     protected int getLayoutResource() {
@@ -41,6 +51,11 @@ public final class SpeechActivity extends BaseActivity implements Callback<Speec
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_cancel);
         mToolbar.setTitleTextColor(Color.BLACK);
+
+        Uri mSpeechUri = SmartHouseContentProvider.getSpeechUri();
+        Cursor mCursor = getContentResolver().query(mSpeechUri, null, null, null, null);
+        SpeechListAdapter mAdapter = new SpeechListAdapter(this, mCursor);
+        mListView.setAdapter(mAdapter);
     }
 
     @Override
@@ -49,12 +64,25 @@ public final class SpeechActivity extends BaseActivity implements Callback<Speec
         return super.onOptionsItemSelected(item);
     }
 
+    @Subscribe
+    public void onSpeechItemSelected(SpeechItemSelectEvent event) {
+        String mSpeech = event.getSpeech();
+        mResponseEditText.setText(mSpeech);
+        mResponseEditText.setSelection(mSpeech.length());
+    }
+
     @OnClick(R.id.activity_speech_accept_button)
     public void onAcceptButtonClicked() {
         String mResponseString = mResponseEditText.getText().toString();
         SpeechRequestBean mRequestBean = new SpeechRequestBean(mResponseString);
         SpeechRestInterface mResponse = RestAdapterProvider.getInstance().create(SpeechRestInterface.class);
         mResponse.postJson(mRequestBean, this);
+
+        SmartHouseContentProvider.Speech mSpeech = new SmartHouseContentProvider.Speech();
+        mSpeech.setSpeech(mResponseString);
+
+        Uri mSpeechUri = SmartHouseContentProvider.getSpeechUri();
+        getContentResolver().insert(mSpeechUri, mSpeech.toContentValues());
     }
 
     @Override

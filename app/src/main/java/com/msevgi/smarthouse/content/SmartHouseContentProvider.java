@@ -10,22 +10,31 @@ import de.triplet.simpleprovider.AbstractProvider;
 import de.triplet.simpleprovider.Column;
 import de.triplet.simpleprovider.Table;
 
-public final class BellContentProvider extends AbstractProvider {
+public final class SmartHouseContentProvider extends AbstractProvider {
 
     private static final String AUTHORITY = "com.msevgi.smarthouse";
-    private static final String URI_STRING = "content://com.msevgi.smarthouse/bells";
-    private static Uri mUri;
+    private static final String URI_BELL_STRING = "content://com.msevgi.smarthouse/bells";
+    private static final String URI_SPEECH_STRING = "content://com.msevgi.smarthouse/speechs";
+    private static Uri mBellUri;
+    private static Uri mSpeechUri;
 
     @Override
     protected String getAuthority() {
         return AUTHORITY;
     }
 
-    public static Uri getUri() {
-        if (mUri == null)
-            mUri = Uri.parse(URI_STRING);
+    public static Uri getBellUri() {
+        if (mBellUri == null)
+            mBellUri = Uri.parse(URI_BELL_STRING);
 
-        return mUri;
+        return mBellUri;
+    }
+
+    public static Uri getSpeechUri() {
+        if (mSpeechUri == null)
+            mSpeechUri = Uri.parse(URI_SPEECH_STRING);
+
+        return mSpeechUri;
     }
 
     @Table
@@ -81,6 +90,33 @@ public final class BellContentProvider extends AbstractProvider {
             ContentValues mContentValues = new ContentValues();
             mContentValues.put(KEY_TIME, mTime);
             mContentValues.put(KEY_BITMAP, getByteArray());
+            return mContentValues;
+        }
+
+    }
+
+    @Table
+    public static class Speech {
+
+        @Column(value = Column.FieldType.INTEGER, primaryKey = true)
+        public static final String KEY_ID = "_id";
+
+        @Column(value = Column.FieldType.TEXT)
+        public static final String KEY_SPEECH = "speech";
+
+        private String mSpeech;
+
+        public String getSpeech() {
+            return mSpeech;
+        }
+
+        public void setSpeech(String speech) {
+            mSpeech = speech;
+        }
+
+        public ContentValues toContentValues() {
+            ContentValues mContentValues = new ContentValues();
+            mContentValues.put(KEY_SPEECH, mSpeech);
             return mContentValues;
         }
 

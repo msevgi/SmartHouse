@@ -14,7 +14,7 @@ import com.melnykov.fab.FloatingActionButton;
 import com.msevgi.smarthouse.R;
 import com.msevgi.smarthouse.activity.SpeechActivity;
 import com.msevgi.smarthouse.adapter.BellListAdapter;
-import com.msevgi.smarthouse.content.BellContentProvider;
+import com.msevgi.smarthouse.content.SmartHouseContentProvider;
 
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -36,7 +36,7 @@ public final class BellListFragment extends BaseFragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        Uri mBellUri = BellContentProvider.getUri();
+        Uri mBellUri = SmartHouseContentProvider.getBellUri();
         Cursor mCursor = getActivity().getContentResolver().query(mBellUri, null, null, null, null);
         BellListAdapter mAdapter = new BellListAdapter(getContext(), mCursor);
         mListView.setAdapter(mAdapter);
