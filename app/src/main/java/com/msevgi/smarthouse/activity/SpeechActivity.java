@@ -18,6 +18,7 @@ import com.msevgi.smarthouse.content.SmartHouseContentProvider;
 import com.msevgi.smarthouse.event.SpeechItemSelectEvent;
 import com.msevgi.smarthouse.interfaces.SpeechRestInterface;
 import com.msevgi.smarthouse.provider.RestAdapterProvider;
+import com.msevgi.smarthouse.util.AndroidUtil;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.squareup.otto.Subscribe;
 
@@ -88,6 +89,7 @@ public final class SpeechActivity extends BaseActivity implements Callback<Speec
 
     @Override
     public void success(SpeechResponseBean speechResponseBean, Response response) {
+        AndroidUtil.hideKeyboard(this);
         onBackPressed();
     }
 
