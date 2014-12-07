@@ -2,6 +2,7 @@ package com.msevgi.smarthouse.fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -15,6 +16,8 @@ import com.msevgi.smarthouse.provider.BusProvider;
 import butterknife.ButterKnife;
 
 abstract class BaseFragment extends Fragment {
+
+    private Context mContext;
 
     @Override
     public void onAttach(Activity activity) {
@@ -40,6 +43,13 @@ abstract class BaseFragment extends Fragment {
     public void onDetach() {
         BusProvider.getInstance().unregister(this);
         super.onDetach();
+    }
+
+    protected Context getContext() {
+        if (mContext == null)
+            mContext = getActivity().getBaseContext();
+
+        return mContext;
     }
 
     protected abstract

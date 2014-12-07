@@ -69,7 +69,7 @@ public final class NavigationDrawerListAdapter extends RecyclerView.Adapter<Navi
 
         //TODO: selected menu position, change layout accordingly
         if (mSelectedPosition == position || mTouchedPosition == position) {
-            viewHolder.itemView.setBackgroundColor(viewHolder.itemView.getContext().getResources().getColor(R.color.selected_gray));
+            viewHolder.itemView.setBackgroundColor(viewHolder.itemView.getContext().getResources().getColor(R.color.color_selected_navigation));
         } else {
             viewHolder.itemView.setBackgroundColor(Color.TRANSPARENT);
         }

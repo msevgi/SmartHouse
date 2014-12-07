@@ -17,7 +17,7 @@ import butterknife.InjectView;
 
 public final class BellListAdapter extends CursorAdapter {
 
-    LayoutInflater mInflater;
+    private LayoutInflater mInflater;
 
     public BellListAdapter(Context context, Cursor cursor) {
         super(context, cursor);
