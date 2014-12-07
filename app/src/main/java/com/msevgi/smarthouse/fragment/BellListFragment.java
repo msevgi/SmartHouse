@@ -8,10 +8,13 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.msevgi.smarthouse.R;
 import com.msevgi.smarthouse.adapter.BellListAdapter;
 import com.msevgi.smarthouse.content.BellContentProvider;
+import com.msevgi.smarthouse.event.ResponseButtonClickEvent;
+import com.squareup.otto.Subscribe;
 
 import butterknife.InjectView;
 
@@ -41,5 +44,12 @@ public final class BellListFragment extends BaseFragment {
         getActivity().getContentResolver().insert(mBellUri, mBell.toContentValues());
 
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Subscribe
+    public void onResponseButtonClicked(ResponseButtonClickEvent event) {
+        Cursor mCursor = event.getCursor();
+
+        Toast.makeText(getContext(), mCursor.toString(), Toast.LENGTH_SHORT).show();
     }
 }

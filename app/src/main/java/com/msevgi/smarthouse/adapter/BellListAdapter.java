@@ -11,17 +11,24 @@ import android.widget.TextView;
 
 import com.msevgi.smarthouse.R;
 import com.msevgi.smarthouse.content.BellContentProvider;
+import com.msevgi.smarthouse.event.ResponseButtonClickEvent;
+import com.msevgi.smarthouse.provider.BusProvider;
+import com.msevgi.smarthouse.view.ResponseButton;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 public final class BellListAdapter extends CursorAdapter {
 
     private LayoutInflater mInflater;
+    private int mTimeIndex;
 
     public BellListAdapter(Context context, Cursor cursor) {
         super(context, cursor);
         mInflater = LayoutInflater.from(context);
+
+        mTimeIndex = cursor.getColumnIndex(BellContentProvider.Bell.KEY_TIME);
     }
 
     @Override
@@ -37,21 +44,34 @@ public final class BellListAdapter extends CursorAdapter {
     public void bindView(View view, Context context, Cursor cursor) {
         ViewHolder mViewHolder = (ViewHolder) view.getTag();
 
-        int mTimeIndex = cursor.getColumnIndex(BellContentProvider.Bell.KEY_TIME);
         String mTime = cursor.getString(mTimeIndex);
         mViewHolder.mDateTextView.setText(mTime);
+
+        mViewHolder.mResponseButton.setCursor(cursor);
     }
 
     protected static class ViewHolder {
 
-        @InjectView(R.id.cell_bell_imageview)
+        @InjectView(R.id.cell_bell_photo_imageview)
         ImageView mImageView;
 
-        @InjectView(R.id.cell_bell_textview)
+        @InjectView(R.id.cell_bell_time_textview)
         TextView mDateTextView;
+
+        @InjectView(R.id.cell_bell_response_button)
+        ResponseButton mResponseButton;
 
         public ViewHolder(View view) {
             ButterKnife.inject(this, view);
+        }
+
+        @OnClick(R.id.cell_bell_response_button)
+        protected void onResponseButtonClicked(ResponseButton button) {
+            Cursor mCursor = button.getCursor();
+
+            ResponseButtonClickEvent mEvent = new ResponseButtonClickEvent();
+            mEvent.setCursor(mCursor);
+            BusProvider.getInstance().post(mEvent);
         }
     }
 
