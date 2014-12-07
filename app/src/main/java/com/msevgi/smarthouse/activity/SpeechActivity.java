@@ -1,8 +1,10 @@
 package com.msevgi.smarthouse.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.msevgi.smarthouse.R;
 import com.msevgi.smarthouse.bean.SpeechRequestBean;
@@ -37,6 +39,14 @@ public final class SpeechActivity extends BaseActivity implements Callback<Speec
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_cancel);
+        mToolbar.setTitleTextColor(Color.BLACK);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        onBackPressed();
+        return super.onOptionsItemSelected(item);
     }
 
     @OnClick(R.id.activity_speech_accept_button)

@@ -15,7 +15,6 @@
         <item name="colorPrimaryDark">@color/color_speech_primary_dark</item>
         <item name="colorAccent">@color/color_speech_accent</item>
         <item name="android:textColorPrimary">@color/color_text_primary</item>
-        <item name="drawerArrowStyle">@style/style_drawer_arrow</item>
 
         <item name="android:windowBackground">@color/color_window_background</item>
     </style>
