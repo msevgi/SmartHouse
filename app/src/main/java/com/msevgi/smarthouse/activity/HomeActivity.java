@@ -10,7 +10,6 @@ import android.widget.Toast;
 import com.msevgi.smarthouse.R;
 import com.msevgi.smarthouse.event.NavigationItemSelectEvent;
 import com.msevgi.smarthouse.fragment.NavigationDrawerFragment;
-import com.msevgi.smarthouse.task.GcmRegisterAsyncTask;
 import com.squareup.otto.Subscribe;
 
 import butterknife.InjectView;
@@ -51,9 +50,6 @@ public final class HomeActivity extends BaseActivity {
     @Subscribe
     public void onNavigationDrawerItemSelected(NavigationItemSelectEvent event) {
         Toast.makeText(this, "Menu item selected -> " + event.getPosition(), Toast.LENGTH_SHORT).show();
-
-        GcmRegisterAsyncTask mTask = new GcmRegisterAsyncTask(this);
-        mTask.execute();
     }
 
     @Override
