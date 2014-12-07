@@ -5,4 +5,5 @@
     android:layout_height="match_parent"
     android:listSelector="@android:color/transparent"
     android:clickable="true"
-    android:divider="@null"/>
+    android:divider="@null"
+    android:dividerHeight="-16dp"/>
