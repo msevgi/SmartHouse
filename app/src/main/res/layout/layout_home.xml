@@ -21,7 +21,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
-        <!-- android:layout_marginTop="?android:attr/actionBarSize"-->
         <fragment
             android:id="@+id/activity_home_fragment_drawer"
             android:name="com.msevgi.smarthouse.fragment.NavigationDrawerFragment"
@@ -30,4 +29,11 @@
             android:layout_gravity="start"
             app:layout="@layout/fragment_navigation_drawer"/>
     </android.support.v4.widget.DrawerLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@drawable/drawable_shadow"
+        android:layout_below="@+id/activity_home_toolbar"/>
+
 </RelativeLayout>

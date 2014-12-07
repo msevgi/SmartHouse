@@ -11,7 +11,7 @@
         android:id="@+id/activity_speech_toolbar"
         android:layout_width="match_parent"
         android:layout_height="112dp"
-        android:background="#9E9E9E"
+        android:background="#FAFAFA"
         style="@style/style_toolbar"/>
 
     <com.melnykov.fab.FloatingActionButton
@@ -25,9 +25,9 @@
         android:layout_marginRight="16dp"
         android:layout_marginTop="-26dp"
         android:transitionName="button"
-        fab:fab_colorNormal="#8BC34A"
-        fab:fab_colorPressed="#689F38"
-        fab:fab_colorRipple="#00E676"/>
+        fab:fab_colorNormal="@color/color_speech_fab_normal"
+        fab:fab_colorPressed="@color/color_speech_fab_pressed"
+        fab:fab_colorRipple="@color/color_speech_fab_ripple"/>
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/activity_speech_reponse_edittext"
@@ -38,8 +38,15 @@
         app:baseColor="@android:color/black"
         app:floatingLabel="highlight"
         app:maxCharacters="30"
-        app:primaryColor="@android:color/black"
+        app:primaryColor="@android:color/darker_gray"
+        app:errorColor="@android:color/holo_red_light"
         android:layout_below="@+id/activity_speech_accept_button"
         android:layout_margin="16dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@drawable/drawable_shadow"
+        android:layout_below="@+id/activity_speech_toolbar"/>
 
 </RelativeLayout>
