@@ -1,13 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">Smart House</string>
+
     <string name="drawer_open">Menu opened</string>
     <string name="drawer_close">Menu closed</string>
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_speech">SpeechActivity</string>
-    <string name="hello_world">Hello world!</string>
+
+    <string name="action_template">Template</string>
+
     <string name="title_last_bell">Last Bell</string>
     <string name="title_bell_list">List</string>
+    <string name="title_activity_speech">Speech Activity</string>
 
 </resources>

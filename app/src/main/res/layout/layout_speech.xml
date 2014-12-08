@@ -40,6 +40,8 @@
         app:maxCharacters="30"
         app:primaryColor="@android:color/darker_gray"
         app:errorColor="@android:color/holo_red_light"
+        android:singleLine="true"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
         android:layout_below="@+id/activity_speech_accept_button"
         android:layout_margin="16dp"/>
 
@@ -48,13 +50,5 @@
         android:layout_height="4dp"
         android:background="@drawable/drawable_shadow"
         android:layout_below="@+id/activity_speech_toolbar"/>
-
-    <ListView
-        android:id="@+id/activity_speech_listview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="16dp"
-        android:layout_below="@+id/activity_speech_reponse_edittext"/>
 
 </RelativeLayout>

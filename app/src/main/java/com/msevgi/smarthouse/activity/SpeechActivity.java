@@ -7,9 +7,10 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.msevgi.smarthouse.R;
 import com.msevgi.smarthouse.adapter.SpeechListAdapter;
 import com.msevgi.smarthouse.bean.SpeechRequestBean;
@@ -36,8 +37,8 @@ public final class SpeechActivity extends BaseActivity implements Callback<Speec
     @InjectView(R.id.activity_speech_toolbar)
     protected Toolbar mToolbar;
 
-    @InjectView(R.id.activity_speech_listview)
-    protected ListView mListView;
+    private SpeechListAdapter mAdapter;
+    private MaterialDialog mDialog;
 
     @NonNull
     @Override
@@ -56,13 +57,30 @@ public final class SpeechActivity extends BaseActivity implements Callback<Speec
 
         Uri mSpeechUri = SmartHouseContentProvider.getSpeechUri();
         Cursor mCursor = getContentResolver().query(mSpeechUri, null, null, null, null);
-        SpeechListAdapter mAdapter = new SpeechListAdapter(this, mCursor);
-        mListView.setAdapter(mAdapter);
+        mAdapter = new SpeechListAdapter(this, mCursor);
+        mDialog = new MaterialDialog.Builder(this)
+                .title("Choose a template")
+                .adapter(mAdapter)
+                .build();
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_speech, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        onBackPressed();
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                break;
+            case R.id.action_template:
+                mDialog.show();
+                break;
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -71,6 +89,7 @@ public final class SpeechActivity extends BaseActivity implements Callback<Speec
         String mSpeech = event.getSpeech();
         mResponseEditText.setText(mSpeech);
         mResponseEditText.setSelection(mSpeech.length());
+        mDialog.dismiss();
     }
 
     @OnClick(R.id.activity_speech_accept_button)
@@ -89,7 +108,6 @@ public final class SpeechActivity extends BaseActivity implements Callback<Speec
 
     @Override
     public void success(SpeechResponseBean speechResponseBean, Response response) {
-        AndroidUtil.hideKeyboard(this);
         onBackPressed();
     }
 
@@ -97,4 +115,11 @@ public final class SpeechActivity extends BaseActivity implements Callback<Speec
     public void failure(RetrofitError error) {
 
     }
+
+    @Override
+    public void onBackPressed() {
+        AndroidUtil.hideKeyboard(this);
+        super.onBackPressed();
+    }
+
 }
