@@ -1,6 +1,7 @@
 package com.msevgi.smarthouse.fragment;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,7 +10,7 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
-import com.melnykov.fab.FloatingActionButton;
+import com.astuetz.PagerSlidingTabStrip;
 import com.msevgi.smarthouse.R;
 import com.msevgi.smarthouse.activity.SpeechActivity;
 import com.msevgi.smarthouse.adapter.BellPagerAdapter;
@@ -20,11 +21,11 @@ import butterknife.OnClick;
 public final class BellFragment extends BaseFragment {
     public static final int POSITION = 0;
 
-    @InjectView(R.id.fragment_bell_response_button)
-    protected FloatingActionButton mResponseButton;
-
     @InjectView(R.id.fragment_bell_viewpager)
     protected ViewPager mViewPager;
+
+    @InjectView(R.id.fragment_bell_tabstrip)
+    protected PagerSlidingTabStrip mTabStrip;
 
     @NonNull
     @Override
@@ -36,8 +37,11 @@ public final class BellFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        BellPagerAdapter mAdapter = new BellPagerAdapter(getChildFragmentManager());
+        BellPagerAdapter mAdapter = new BellPagerAdapter(getContext(), getChildFragmentManager());
         mViewPager.setAdapter(mAdapter);
+
+        mTabStrip.setTextColor(Color.WHITE);
+        mTabStrip.setViewPager(mViewPager);
     }
 
     @OnClick(R.id.fragment_bell_response_button)

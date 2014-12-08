@@ -35,7 +35,6 @@ public final class NavigationDrawerListAdapter extends RecyclerView.Adapter<Navi
     public void onBindViewHolder(NavigationDrawerListAdapter.ViewHolder viewHolder, final int position) {
         viewHolder.textView.setText(mData.get(position).getText());
         viewHolder.textView.setCompoundDrawablesWithIntrinsicBounds(mData.get(position).getDrawable(), null, null, null);
-
         viewHolder.itemView.setOnTouchListener(new View.OnTouchListener() {
                                                    @Override
                                                    public boolean onTouch(View v, MotionEvent event) {

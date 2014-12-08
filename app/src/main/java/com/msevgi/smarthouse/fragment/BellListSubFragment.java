@@ -13,7 +13,7 @@ import com.msevgi.smarthouse.content.SmartHouseContentProvider;
 
 import butterknife.InjectView;
 
-public final class BellListSubFragment extends BaseFragment {
+public final class BellListSubFragment extends SubBaseFragment {
 
     public static final int SUB_POSITION = 0;
 
@@ -23,7 +23,13 @@ public final class BellListSubFragment extends BaseFragment {
     @NonNull
     @Override
     protected int getLayoutResource() {
-        return R.layout.fragment_bell_list;
+        return R.layout.sub_fragment_bell_list;
+    }
+
+    @NonNull
+    @Override
+    public int getTitleResource() {
+        return R.string.title_bell_list;
     }
 
     @Override
@@ -36,5 +42,6 @@ public final class BellListSubFragment extends BaseFragment {
 
         super.onViewCreated(view, savedInstanceState);
     }
+
 
 }

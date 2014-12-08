@@ -30,7 +30,6 @@ abstract class BaseActivity extends ActionBarActivity {
         getBus().unregister(this);
     }
 
-
     protected Bus getBus() {
         return BusProvider.getInstance();
     }

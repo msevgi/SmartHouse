@@ -4,13 +4,19 @@ import android.support.annotation.NonNull;
 
 import com.msevgi.smarthouse.R;
 
-public final class LastBellSubFragment extends BaseFragment {
+public final class LastBellSubFragment extends SubBaseFragment {
 
     public static final int SUB_POSITION = 1;
 
     @NonNull
     @Override
     protected int getLayoutResource() {
-        return R.layout.fragment_last_bell;
+        return R.layout.sub_fragment_last_bell;
+    }
+
+    @NonNull
+    @Override
+    public int getTitleResource() {
+        return R.string.title_last_bell;
     }
 }
