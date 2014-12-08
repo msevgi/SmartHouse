@@ -5,10 +5,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.astuetz.PagerSlidingTabStrip;
+import com.msevgi.smarthouse.R;
 import com.msevgi.smarthouse.fragment.BellListSubFragment;
 import com.msevgi.smarthouse.fragment.LastBellSubFragment;
 
-public final class BellPagerAdapter extends FragmentStatePagerAdapter {
+public final class BellPagerAdapter extends FragmentStatePagerAdapter implements PagerSlidingTabStrip.IconTabProvider {
     private static final int PAGE_COUNT = 2;
 
     private Context mContext;
@@ -46,5 +48,17 @@ public final class BellPagerAdapter extends FragmentStatePagerAdapter {
                 throw new IllegalArgumentException("Must return a title");
         }
 
+    }
+
+    @Override
+    public int getPageIconResId(int position) {
+        switch (position) {
+            case BellListSubFragment.SUB_POSITION:
+                return R.drawable.ic_list;
+            case LastBellSubFragment.SUB_POSITION:
+                return R.drawable.ic_bell;
+            default:
+                throw new IllegalArgumentException("Must return a icon");
+        }
     }
 }
