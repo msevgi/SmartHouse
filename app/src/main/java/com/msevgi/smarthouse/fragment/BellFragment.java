@@ -40,7 +40,6 @@ public final class BellFragment extends BaseFragment {
         BellPagerAdapter mAdapter = new BellPagerAdapter(getContext(), getChildFragmentManager());
         mViewPager.setAdapter(mAdapter);
 
-        mTabStrip.setTextColor(Color.WHITE);
         mTabStrip.setViewPager(mViewPager);
     }
 
