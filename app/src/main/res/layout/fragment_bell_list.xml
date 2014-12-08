@@ -1,27 +1,10 @@
-<FrameLayout
+<ListView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_bell_list_listview"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:listSelector="@android:color/transparent"
+    android:clickable="true"
+    android:divider="@android:color/darker_gray"
+    android:dividerHeight="1dp"/>
 
-    <ListView
-        android:id="@+id/fragment_bell_list_listview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:listSelector="@android:color/transparent"
-        android:clickable="true"
-        android:divider="@android:color/darker_gray"
-        android:dividerHeight="1dp"/>
-
-    <com.melnykov.fab.FloatingActionButton
-        android:id="@+id/fragment_bell_response_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:layout_margin="16dp"
-        android:src="@drawable/ic_speaker"
-        fab:fab_colorNormal="@color/color_home_fab_normal"
-        fab:fab_colorPressed="@color/color_home_fab_pressed"
-        fab:fab_colorRipple="@color/color_home_fab_ripple"/>
-
-</FrameLayout>

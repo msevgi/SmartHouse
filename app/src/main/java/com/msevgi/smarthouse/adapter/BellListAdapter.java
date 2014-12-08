@@ -19,6 +19,8 @@ import butterknife.InjectView;
 
 public final class BellListAdapter extends CursorAdapter {
 
+    public static final int POSITION = 0;
+
     private LayoutInflater mInflater;
     private int mTimeIndex;
     private int mBitmapIndex;

@@ -2,7 +2,7 @@ package com.msevgi.smarthouse.event;
 
 import android.database.Cursor;
 
-public class ResponseButtonClickEvent {
+public final class ResponseButtonClickEvent {
     private Cursor mCursor;
 
     public ResponseButtonClickEvent(Cursor mCursor) {

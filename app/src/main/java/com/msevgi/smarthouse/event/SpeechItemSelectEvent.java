@@ -1,7 +1,7 @@
 package com.msevgi.smarthouse.event;
 
 
-public class SpeechItemSelectEvent {
+public final class SpeechItemSelectEvent {
     private String mSpeech;
 
     public SpeechItemSelectEvent() {

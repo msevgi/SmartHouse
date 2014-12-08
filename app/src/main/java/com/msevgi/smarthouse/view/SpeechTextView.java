@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-public class SpeechTextView extends TextView {
+public final class SpeechTextView extends TextView {
     private String mSpeech;
 
     public SpeechTextView(Context context) {

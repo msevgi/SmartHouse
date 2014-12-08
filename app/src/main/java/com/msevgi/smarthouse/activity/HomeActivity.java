@@ -10,7 +10,7 @@ import android.view.Menu;
 
 import com.msevgi.smarthouse.R;
 import com.msevgi.smarthouse.event.NavigationItemSelectEvent;
-import com.msevgi.smarthouse.fragment.BellListFragment;
+import com.msevgi.smarthouse.fragment.BellFragment;
 import com.msevgi.smarthouse.fragment.NavigationDrawerFragment;
 import com.msevgi.smarthouse.task.GcmRegisterAsyncTask;
 import com.squareup.otto.Subscribe;
@@ -41,7 +41,7 @@ public final class HomeActivity extends BaseActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.activity_home_fragment_drawer);
+        mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.activity_home_fragment_drawer);
         mNavigationDrawerFragment.setup(R.id.activity_home_fragment_drawer, mDrawerLayout, mToolbar);
 
         new GcmRegisterAsyncTask(this).execute();
@@ -60,10 +60,10 @@ public final class HomeActivity extends BaseActivity {
             return;
 
         switch (position) {
-            case BellListFragment.POSITION:
-                getFragmentManager()
+            case BellFragment.POSITION:
+                getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.activity_home_container, new BellListFragment())
+                        .replace(R.id.activity_home_container, new BellFragment())
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                         .commit();
                 break;
