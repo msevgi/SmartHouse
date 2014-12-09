@@ -47,12 +47,6 @@ public final class HomeActivity extends BaseActivity {
         new GcmRegisterAsyncTask(this).execute();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
     @Subscribe
     public void onNavigationDrawerItemSelected(NavigationItemSelectEvent event) {
         int position = event.getPosition();
