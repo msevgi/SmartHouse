@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
 
-import com.badoo.mobile.util.WeakHandler;
 import com.msevgi.smarthouse.R;
 import com.msevgi.smarthouse.content.SmartHouseContentProvider;
 import com.msevgi.smarthouse.helper.NotificationFacade;
@@ -25,7 +24,6 @@ import retrofit.client.Response;
 public final class GcmMessageHandler extends IntentService {
 
     private String mId;
-    private WeakHandler mHandler;
 
     public GcmMessageHandler() {
         super("GcmMessageHandler");
@@ -34,7 +32,6 @@ public final class GcmMessageHandler extends IntentService {
     @Override
     public void onCreate() {
         super.onCreate();
-        mHandler = new WeakHandler();
     }
 
     @Override

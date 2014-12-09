@@ -1,7 +1,6 @@
 package com.msevgi.smarthouse.fragment;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,6 +13,7 @@ import com.astuetz.PagerSlidingTabStrip;
 import com.msevgi.smarthouse.R;
 import com.msevgi.smarthouse.activity.SpeechActivity;
 import com.msevgi.smarthouse.adapter.BellPagerAdapter;
+import com.msevgi.smarthouse.view.FadePageTransformer;
 
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -39,6 +39,7 @@ public final class BellFragment extends BaseFragment {
 
         BellPagerAdapter mAdapter = new BellPagerAdapter(getContext(), getChildFragmentManager());
         mViewPager.setAdapter(mAdapter);
+        mViewPager.setPageTransformer(true, new FadePageTransformer());
 
         mTabStrip.setViewPager(mViewPager);
     }
