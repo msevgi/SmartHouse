@@ -5,6 +5,6 @@
     android:layout_height="match_parent"
     android:listSelector="@android:color/transparent"
     android:clickable="true"
-    android:divider="@android:color/darker_gray"
-    android:dividerHeight="1dp"/>
+    android:divider="@android:color/transparent"
+    android:dividerHeight="-16dp"/>
 

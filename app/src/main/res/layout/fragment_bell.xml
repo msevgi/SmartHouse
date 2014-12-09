@@ -10,6 +10,7 @@
         android:layout_height="?attr/actionBarSize"
         android:layout_alignParentTop="true"
         android:background="@color/color_home_primary"
+        app:pstsTabBackground="@drawable/selector_tabstrip"
         app:pstsDividerColor="@android:color/transparent"
         app:pstsShouldExpand="true"
         app:pstsIndicatorColor="@android:color/white"
