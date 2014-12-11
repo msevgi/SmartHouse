@@ -5,13 +5,13 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.msevgi.smarthouse.R;
 import com.msevgi.smarthouse.event.SnapshotFailureResponseEvent;
 import com.msevgi.smarthouse.event.SnapshotRequestEvent;
 import com.msevgi.smarthouse.event.SnapshotSuccessResponseEvent;
 import com.msevgi.smarthouse.task.SnapshotAsyncTask;
+import com.msevgi.smarthouse.view.LoadingImageView;
 import com.squareup.otto.Subscribe;
 
 import butterknife.InjectView;
@@ -19,8 +19,8 @@ import butterknife.InjectView;
 public final class SnapshotFragment extends BaseFragment {
     public static final int POSITION = 1;
 
-    @InjectView(R.id.fragment_snapshot_imageview)
-    protected ImageView mImageView;
+    @InjectView(R.id.fragment_snapshot_progress_imageview)
+    protected LoadingImageView mLoadingImageView;
 
     @NonNull
     @Override
@@ -38,18 +38,19 @@ public final class SnapshotFragment extends BaseFragment {
 
     @Subscribe
     public void onSnapshotRequestEvent(SnapshotRequestEvent event) {
-        // TODO Show progress.
+        mLoadingImageView.showProgress();
     }
 
     @Subscribe
     public void onSnapshotSuccessEvent(SnapshotSuccessResponseEvent event) {
         Bitmap mBitmap = event.getBitmap();
-        mImageView.setImageBitmap(mBitmap);
+        mLoadingImageView.hideProgress();
+        mLoadingImageView.setImageBitmap(mBitmap);
     }
 
 
     @Subscribe
     public void onSnapshotFailureEvent(SnapshotFailureResponseEvent event) {
-        // TODO Hide progress.
+        mLoadingImageView.hideProgress();
     }
 }
