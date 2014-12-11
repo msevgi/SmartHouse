@@ -1,23 +1,20 @@
 package com.msevgi.smarthouse.fragment;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.msevgi.smarthouse.R;
-import com.msevgi.smarthouse.interfaces.SnapshotRestInterface;
-import com.msevgi.smarthouse.provider.RestAdapterProvider;
-
-import java.io.InputStream;
+import com.msevgi.smarthouse.event.SnapshotFailureResponseEvent;
+import com.msevgi.smarthouse.event.SnapshotRequestEvent;
+import com.msevgi.smarthouse.event.SnapshotSuccessResponseEvent;
+import com.msevgi.smarthouse.task.SnapshotAsyncTask;
+import com.squareup.otto.Subscribe;
 
 import butterknife.InjectView;
-import retrofit.client.Response;
 
 public final class SnapshotFragment extends BaseFragment {
     public static final int POSITION = 1;
@@ -35,25 +32,24 @@ public final class SnapshotFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        StrictMode.ThreadPolicy mPolicy = new StrictMode.ThreadPolicy
-                .Builder()
-                .permitAll()
-                .build();
-        StrictMode.setThreadPolicy(mPolicy);
-        getSnapshot();
+        SnapshotAsyncTask mAsyncTask = new SnapshotAsyncTask();
+        mAsyncTask.execute();
     }
 
-    public void getSnapshot() {
-        try {
-            SnapshotRestInterface mSnapshotRestInterface = RestAdapterProvider.getInstance().create(SnapshotRestInterface.class);
-            Response mResponse = mSnapshotRestInterface.getByteArray();
-            InputStream mInputStream = mResponse.getBody().in();
-            Bitmap mBitmap = BitmapFactory.decodeStream(mInputStream);
-            mImageView.setImageBitmap(mBitmap);
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.e("HATA", e.getMessage());
-        }
+    @Subscribe
+    public void onSnapshotRequestEvent(SnapshotRequestEvent event) {
+        // TODO Show progress.
     }
 
+    @Subscribe
+    public void onSnapshotSuccessEvent(SnapshotSuccessResponseEvent event) {
+        Bitmap mBitmap = event.getBitmap();
+        mImageView.setImageBitmap(mBitmap);
+    }
+
+
+    @Subscribe
+    public void onSnapshotFailureEvent(SnapshotFailureResponseEvent event) {
+        // TODO Hide progress.
+    }
 }
