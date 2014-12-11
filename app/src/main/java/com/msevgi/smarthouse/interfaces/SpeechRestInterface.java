@@ -8,6 +8,7 @@ import retrofit.http.Body;
 import retrofit.http.POST;
 
 public interface SpeechRestInterface {
+
     @POST("/textToSpeech")
-    void postJson(@Body SpeechRequestBean body, Callback<SpeechResponseBean> callback);
+    void send(@Body SpeechRequestBean body, Callback<SpeechResponseBean> callback);
 }

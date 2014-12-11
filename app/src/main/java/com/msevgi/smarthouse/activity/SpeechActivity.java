@@ -94,13 +94,16 @@ public final class SpeechActivity extends BaseActivity implements Callback<Speec
 
     @OnClick(R.id.activity_speech_accept_button)
     public void onAcceptButtonClicked() {
-        String mResponseString = mResponseEditText.getText().toString();
-        SpeechRequestBean mRequestBean = new SpeechRequestBean(mResponseString);
-        SpeechRestInterface mResponse = RestAdapterProvider.getInstance().create(SpeechRestInterface.class);
-        mResponse.postJson(mRequestBean, this);
+        String mSpeechString = mResponseEditText.getText().toString();
+
+        SpeechRequestBean mRequestBean = new SpeechRequestBean(mSpeechString);
+        mRequestBean.setLanguage("EN");
+
+        SpeechRestInterface mResponseInterface = RestAdapterProvider.getInstance().create(SpeechRestInterface.class);
+        mResponseInterface.send(mRequestBean, this);
 
         SmartHouseContentProvider.Speech mSpeech = new SmartHouseContentProvider.Speech();
-        mSpeech.setSpeech(mResponseString);
+        mSpeech.setSpeech(mSpeechString);
 
         Uri mSpeechUri = SmartHouseContentProvider.getSpeechUri();
         getContentResolver().insert(mSpeechUri, mSpeech.toContentValues());
