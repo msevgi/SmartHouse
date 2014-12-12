@@ -2,8 +2,6 @@ package com.msevgi.smarthouse.adapter;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +11,7 @@ import android.widget.TextView;
 
 import com.msevgi.smarthouse.R;
 import com.msevgi.smarthouse.content.SmartHouseContentProvider;
+import com.squareup.picasso.Picasso;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -23,14 +22,14 @@ public final class BellListAdapter extends CursorAdapter {
 
     private LayoutInflater mInflater;
     private int mTimeIndex;
-    private int mBitmapIndex;
+    private int mUrlIndex;
 
     public BellListAdapter(Context context, Cursor cursor) {
         super(context, cursor);
         mInflater = LayoutInflater.from(context);
 
         mTimeIndex = cursor.getColumnIndex(SmartHouseContentProvider.Bell.KEY_TIME);
-        mBitmapIndex = cursor.getColumnIndex(SmartHouseContentProvider.Bell.KEY_BITMAP);
+        mUrlIndex = cursor.getColumnIndex(SmartHouseContentProvider.Bell.KEY_URL);
     }
 
     @Override
@@ -49,9 +48,11 @@ public final class BellListAdapter extends CursorAdapter {
         String mTime = cursor.getString(mTimeIndex);
         mViewHolder.mDateTextView.setText(mTime);
 
-        byte[] mByteArray = cursor.getBlob(mBitmapIndex);
-        Bitmap mBitmap = BitmapFactory.decodeByteArray(mByteArray, 0, mByteArray.length);
-        mViewHolder.mImageView.setImageBitmap(mBitmap);
+        String mUrl = cursor.getString(mUrlIndex);
+        Picasso
+                .with(context)
+                .load(mUrl)
+                .into(mViewHolder.mImageView);
     }
 
     protected static class ViewHolder {

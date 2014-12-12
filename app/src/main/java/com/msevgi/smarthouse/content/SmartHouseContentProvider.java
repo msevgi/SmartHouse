@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.graphics.Bitmap;
 import android.net.Uri;
 
+import com.msevgi.smarthouse.constant.ApplicationConstants;
+
 import java.io.ByteArrayOutputStream;
 
 import de.triplet.simpleprovider.AbstractProvider;
@@ -44,10 +46,13 @@ public final class SmartHouseContentProvider extends AbstractProvider {
         public static final String KEY_ID = "_id";
 
         @Column(value = Column.FieldType.INTEGER)
-        public static final String PHOTO_ID = "photo_id";
+        public static final String KEY_PHOTO_ID = "photo_id";
 
         @Column(Column.FieldType.TEXT)
         public static final String KEY_TIME = "time";
+
+        @Column(Column.FieldType.TEXT)
+        public static final String KEY_URL = "url";
 
         @Column(Column.FieldType.BLOB)
         public static final String KEY_BITMAP = "bitmap";
@@ -80,15 +85,22 @@ public final class SmartHouseContentProvider extends AbstractProvider {
             this.mPhotoId = photoId;
         }
 
-        public byte[] getByteArray() {
+        private byte[] getByteArray() {
             ByteArrayOutputStream mOutputStream = new ByteArrayOutputStream();
             mBitmap.compress(Bitmap.CompressFormat.PNG, 100, mOutputStream);
             return mOutputStream.toByteArray();
         }
 
+        private String getUrl() {
+            String mUrl = ApplicationConstants.REST_VISITOR_PHOTO.concat(mPhotoId);
+            return mUrl;
+        }
+
         public ContentValues toContentValues() {
             ContentValues mContentValues = new ContentValues();
             mContentValues.put(KEY_TIME, mTime);
+            mContentValues.put(KEY_PHOTO_ID, mPhotoId);
+            mContentValues.put(KEY_URL, getUrl());
             mContentValues.put(KEY_BITMAP, getByteArray());
             return mContentValues;
         }

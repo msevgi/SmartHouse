@@ -10,6 +10,7 @@ import android.os.SystemClock;
 import android.util.Log;
 
 import com.msevgi.smarthouse.R;
+import com.msevgi.smarthouse.constant.ApplicationConstants;
 import com.msevgi.smarthouse.content.SmartHouseContentProvider;
 import com.msevgi.smarthouse.helper.NotificationFacade;
 import com.msevgi.smarthouse.interfaces.PhotoRestInterface;
@@ -37,6 +38,7 @@ public final class GcmMessageHandler extends IntentService {
         Bundle mExtras = intent.getExtras();
 
         String mId = mExtras.getString("id");
+        String mTitle = mExtras.getString("title");
 
         Bitmap mBitmap = null;
         try {
