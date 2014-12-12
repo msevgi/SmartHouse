@@ -23,8 +23,6 @@ import retrofit.client.Response;
 
 public final class GcmMessageHandler extends IntentService {
 
-    private String mId;
-
     public GcmMessageHandler() {
         super("GcmMessageHandler");
     }
@@ -38,9 +36,8 @@ public final class GcmMessageHandler extends IntentService {
     protected void onHandleIntent(Intent intent) {
         Bundle mExtras = intent.getExtras();
 
-        mId = mExtras.getString("id");
+        String mId = mExtras.getString("id");
 
-        // Create an instance of our GitHub API interface.
         Bitmap mBitmap = null;
         try {
             PhotoRestInterface mRestInterface = RestAdapterProvider.getInstance().create(PhotoRestInterface.class);
