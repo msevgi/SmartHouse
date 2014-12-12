@@ -103,7 +103,7 @@ public final class SpeechActivity extends BaseActivity implements Callback<Speec
         mResponseInterface.send(mRequestBean, this);
 
         SmartHouseContentProvider.Speech mSpeech = new SmartHouseContentProvider.Speech();
-        mSpeech.setSpeech(mSpeechString);
+        mSpeech.setContent(mSpeechString);
 
         Uri mSpeechUri = SmartHouseContentProvider.getSpeechUri();
         getContentResolver().insert(mSpeechUri, mSpeech.toContentValues());

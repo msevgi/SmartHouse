@@ -102,21 +102,21 @@ public final class SmartHouseContentProvider extends AbstractProvider {
         public static final String KEY_ID = "_id";
 
         @Column(value = Column.FieldType.TEXT)
-        public static final String KEY_SPEECH = "speech";
+        public static final String KEY_CONTENT = "content";
 
-        private String mSpeech;
+        private String mContent;
 
-        public String getSpeech() {
-            return mSpeech;
+        public String getContent() {
+            return mContent;
         }
 
-        public void setSpeech(String speech) {
-            mSpeech = speech;
+        public void setContent(String content) {
+            mContent = content;
         }
 
         public ContentValues toContentValues() {
             ContentValues mContentValues = new ContentValues();
-            mContentValues.put(KEY_SPEECH, mSpeech);
+            mContentValues.put(KEY_CONTENT, mContent);
             return mContentValues;
         }
 

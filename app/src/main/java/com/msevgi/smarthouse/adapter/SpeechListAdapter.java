@@ -6,7 +6,6 @@ import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.msevgi.smarthouse.R;
 import com.msevgi.smarthouse.content.SmartHouseContentProvider;
@@ -21,13 +20,13 @@ import butterknife.OnClick;
 public final class SpeechListAdapter extends CursorAdapter {
 
     private LayoutInflater mInflater;
-    private int mSpeechIndex;
+    private int mContentIndex;
 
     public SpeechListAdapter(Context context, Cursor cursor) {
         super(context, cursor);
         mInflater = LayoutInflater.from(context);
 
-        mSpeechIndex = cursor.getColumnIndex(SmartHouseContentProvider.Speech.KEY_SPEECH);
+        mContentIndex = cursor.getColumnIndex(SmartHouseContentProvider.Speech.KEY_CONTENT);
     }
 
     @Override
@@ -43,7 +42,7 @@ public final class SpeechListAdapter extends CursorAdapter {
     public void bindView(View view, Context context, Cursor cursor) {
         ViewHolder mViewHolder = (ViewHolder) view.getTag();
 
-        String mSpeech = cursor.getString(mSpeechIndex);
+        String mSpeech = cursor.getString(mContentIndex);
         mViewHolder.mSpeechTextView.setSpeech(mSpeech);
         mViewHolder.mSpeechTextView.setText(mSpeech);
     }
