@@ -3,10 +3,7 @@ package com.msevgi.smarthouse.event;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 
-/**
- * Created by akturke on 12/11/2014.
- */
-public class SnapshotSuccessResponseEvent {
+public final class SnapshotSuccessResponseEvent {
     @NonNull
     Bitmap mBitmap;
 

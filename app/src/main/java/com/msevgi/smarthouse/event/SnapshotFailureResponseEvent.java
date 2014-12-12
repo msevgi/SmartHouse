@@ -1,4 +1,4 @@
 package com.msevgi.smarthouse.event;
 
-public class SnapshotFailureResponseEvent {
+public final class SnapshotFailureResponseEvent {
 }

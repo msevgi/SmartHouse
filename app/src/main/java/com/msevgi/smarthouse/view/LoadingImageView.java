@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import com.msevgi.smarthouse.R;
 import com.pnikosis.materialishprogress.ProgressWheel;
 
-public class LoadingImageView extends FrameLayout {
+public final class LoadingImageView extends FrameLayout {
     private ImageView mImageView;
     private ProgressWheel mProgressWhell;
 
