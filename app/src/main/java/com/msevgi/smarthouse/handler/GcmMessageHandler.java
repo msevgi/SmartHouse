@@ -4,13 +4,12 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.util.Log;
 
 import com.msevgi.smarthouse.R;
-import com.msevgi.smarthouse.constant.ApplicationConstants;
 import com.msevgi.smarthouse.content.SmartHouseContentProvider;
 import com.msevgi.smarthouse.helper.NotificationFacade;
 import com.msevgi.smarthouse.interfaces.PhotoRestInterface;
@@ -41,11 +40,14 @@ public final class GcmMessageHandler extends IntentService {
         String mTitle = mExtras.getString("title");
 
         Bitmap mBitmap = null;
+        Bitmap mThumbnail = null;
         try {
             PhotoRestInterface mRestInterface = RestAdapterProvider.getInstance().create(PhotoRestInterface.class);
             Response mResponse = mRestInterface.getByteArray(mId);
             InputStream mInputStream = mResponse.getBody().in();
+
             mBitmap = BitmapFactory.decodeStream(mInputStream);
+            mThumbnail = ThumbnailUtils.extractThumbnail(mBitmap, 256, 256);
         } catch (IOException e) {
             Log.i("GCM", "Received : Corrupted Image Data");
         }
@@ -64,7 +66,7 @@ public final class GcmMessageHandler extends IntentService {
                 .setContentTitle("Door has ring!")
                 .setContentText("The id of photo is " + mId)
                 .setSmallIcon(R.drawable.ic_home)
-                .setLargeIcon(mBitmap);
+                .setLargeIcon(mThumbnail);
         mNotificationFacade.show();
 
         Log.i("GCM", "Received : " + mExtras.getString("id"));
