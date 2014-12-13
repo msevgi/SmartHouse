@@ -4,14 +4,17 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/cell_bell_time_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
     <com.msevgi.smarthouse.view.SquaredImageView
         android:id="@+id/cell_bell_photo_imageview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleType="centerCrop"/>
 
-    <TextView
-        android:id="@+id/cell_bell_time_textview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
 </LinearLayout>

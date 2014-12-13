@@ -13,20 +13,27 @@ import com.msevgi.smarthouse.R;
 import com.msevgi.smarthouse.content.SmartHouseContentProvider;
 import com.squareup.picasso.Picasso;
 
+import org.ocpsoft.prettytime.PrettyTime;
+
+import java.util.Date;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 public final class BellListAdapter extends CursorAdapter {
 
     private LayoutInflater mInflater;
-    private int mTimeIndex;
+    private PrettyTime mPrettyTime;
+
+    private int mTimestampIndex;
     private int mUrlIndex;
 
     public BellListAdapter(Context context, Cursor cursor) {
         super(context, cursor);
         mInflater = LayoutInflater.from(context);
+        mPrettyTime = new PrettyTime();
 
-        mTimeIndex = cursor.getColumnIndex(SmartHouseContentProvider.Bell.KEY_TIME);
+        mTimestampIndex = cursor.getColumnIndex(SmartHouseContentProvider.Bell.KEY_TIME_STAMP);
         mUrlIndex = cursor.getColumnIndex(SmartHouseContentProvider.Bell.KEY_URL);
     }
 
@@ -43,7 +50,9 @@ public final class BellListAdapter extends CursorAdapter {
     public void bindView(View view, Context context, Cursor cursor) {
         ViewHolder mViewHolder = (ViewHolder) view.getTag();
 
-        String mTime = cursor.getString(mTimeIndex);
+        long mTimestamp = cursor.getLong(mTimestampIndex);
+        Date mDate = new Date(mTimestamp);
+        String mTime = mPrettyTime.format(mDate);
         mViewHolder.mDateTextView.setText(mTime);
 
         String mUrl = cursor.getString(mUrlIndex);

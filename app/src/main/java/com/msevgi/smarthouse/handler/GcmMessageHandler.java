@@ -51,7 +51,7 @@ public final class GcmMessageHandler extends IntentService {
         }
 
         SmartHouseContentProvider.Bell mBell = new SmartHouseContentProvider.Bell();
-        mBell.setTime(SystemClock.currentThreadTimeMillis() + "");
+        mBell.setTimestamp(System.currentTimeMillis());
         mBell.setPhotoId(mId);
         mBell.setBitmap(mBitmap);
 
