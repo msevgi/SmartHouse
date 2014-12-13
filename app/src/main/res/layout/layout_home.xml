@@ -30,4 +30,10 @@
             app:layout="@layout/fragment_navigation_drawer"/>
     </android.support.v4.widget.DrawerLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@drawable/drawable_shadow"
+        android:layout_below="@id/activity_home_toolbar"/>
+
 </RelativeLayout>

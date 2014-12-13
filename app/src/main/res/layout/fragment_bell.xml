@@ -1,46 +1,26 @@
-<RelativeLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.astuetz.PagerSlidingTabStrip
-        android:id="@+id/fragment_bell_tabstrip"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_alignParentTop="true"
-        android:background="@color/color_home_primary"
-        app:pstsTabBackground="@drawable/selector_tabstrip"
-        app:pstsDividerColor="@android:color/transparent"
-        app:pstsShouldExpand="true"
-        app:pstsIndicatorColor="@android:color/white"
-        app:pstsIndicatorHeight="2dp"
-        app:pstsUnderlineColor="@android:color/transparent"/>
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/fragment_bell_viewpager"
+    <ListView
+        android:id="@+id/fragment_bell_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/fragment_bell_tabstrip"/>
+        android:listSelector="@android:color/transparent"
+        android:clickable="true"
+        android:divider="@android:color/transparent"/>
 
     <com.melnykov.fab.FloatingActionButton
         xmlns:fab="http://schemas.android.com/apk/res-auto"
         android:id="@+id/fragment_bell_response_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
+        android:layout_gravity="bottom|right"
         android:layout_margin="16dp"
-        android:src="@drawable/ic_speaker"
+        android:src="@drawable/ic_reply"
         fab:fab_colorNormal="@color/color_home_fab_normal"
         fab:fab_colorPressed="@color/color_home_fab_pressed"
         fab:fab_colorRipple="@color/color_home_fab_ripple"/>
+</FrameLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:background="@drawable/drawable_shadow"
-        android:layout_below="@id/fragment_bell_tabstrip"/>
-
-
-</RelativeLayout>

@@ -1,19 +1,19 @@
 package com.msevgi.smarthouse.fragment;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.ListView;
 
-import com.astuetz.PagerSlidingTabStrip;
 import com.msevgi.smarthouse.R;
 import com.msevgi.smarthouse.activity.SpeechActivity;
-import com.msevgi.smarthouse.adapter.BellPagerAdapter;
-import com.msevgi.smarthouse.view.FadePageTransformer;
+import com.msevgi.smarthouse.adapter.BellListAdapter;
+import com.msevgi.smarthouse.content.SmartHouseContentProvider;
 
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -21,11 +21,9 @@ import butterknife.OnClick;
 public final class BellFragment extends BaseFragment {
     public static final int POSITION = 0;
 
-    @InjectView(R.id.fragment_bell_viewpager)
-    protected ViewPager mViewPager;
 
-    @InjectView(R.id.fragment_bell_tabstrip)
-    protected PagerSlidingTabStrip mTabStrip;
+    @InjectView(R.id.fragment_bell_listview)
+    protected ListView mListView;
 
     @NonNull
     @Override
@@ -34,14 +32,14 @@ public final class BellFragment extends BaseFragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        Uri mBellUri = SmartHouseContentProvider.getBellUri();
+        String mReverseOrder = SmartHouseContentProvider.Bell.KEY_ID + " DESC";
+        Cursor mCursor = getActivity().getContentResolver().query(mBellUri, null, null, null, mReverseOrder);
+        BellListAdapter mAdapter = new BellListAdapter(getContext(), mCursor);
+        mListView.setAdapter(mAdapter);
+
         super.onViewCreated(view, savedInstanceState);
-
-        BellPagerAdapter mAdapter = new BellPagerAdapter(getContext(), getChildFragmentManager());
-        mViewPager.setAdapter(mAdapter);
-        mViewPager.setPageTransformer(true, new FadePageTransformer());
-
-        mTabStrip.setViewPager(mViewPager);
     }
 
     @OnClick(R.id.fragment_bell_response_button)
@@ -50,4 +48,5 @@ public final class BellFragment extends BaseFragment {
         ActivityOptionsCompat mOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), view, "button");
         ActivityCompat.startActivity(getActivity(), mIntent, mOptions.toBundle());
     }
+
 }
