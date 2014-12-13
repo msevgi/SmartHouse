@@ -7,12 +7,13 @@ import android.graphics.BitmapFactory;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.msevgi.smarthouse.R;
 import com.msevgi.smarthouse.content.SmartHouseContentProvider;
+import com.msevgi.smarthouse.event.NewBellEvent;
 import com.msevgi.smarthouse.helper.NotificationFacade;
 import com.msevgi.smarthouse.interfaces.PhotoRestInterface;
+import com.msevgi.smarthouse.provider.BusProvider;
 import com.msevgi.smarthouse.provider.RestAdapterProvider;
 import com.msevgi.smarthouse.receiver.GcmBroadcastReceiver;
 
@@ -49,7 +50,7 @@ public final class GcmMessageHandler extends IntentService {
             mBitmap = BitmapFactory.decodeStream(mInputStream);
             mThumbnail = ThumbnailUtils.extractThumbnail(mBitmap, 256, 256);
         } catch (IOException e) {
-            Log.i("GCM", "Received : Corrupted Image Data");
+            e.printStackTrace();
         }
 
         SmartHouseContentProvider.Bell mBell = new SmartHouseContentProvider.Bell();
@@ -65,11 +66,13 @@ public final class GcmMessageHandler extends IntentService {
                 .getBuilder()
                 .setContentTitle("Door has ring!")
                 .setContentText("The id of photo is " + mId)
-                .setSmallIcon(R.drawable.ic_launcher)
+                .setSmallIcon(R.drawable.ic_bell)
                 .setLargeIcon(mThumbnail);
         mNotificationFacade.show();
 
-        Log.i("GCM", "Received : " + mExtras.getString("id"));
+        NewBellEvent mEvent = new NewBellEvent();
+        BusProvider.getInstance().post(mEvent);
+
         GcmBroadcastReceiver.completeWakefulIntent(intent);
     }
 
