@@ -1,7 +1,7 @@
 package com.msevgi.smarthouse.helper;
 
 public final class NavigationHelper {
-    private static int sPosition = 0;
+    private static int sPosition = -1;
     private static CharSequence sTitle;
 
     public static int getPosition() {

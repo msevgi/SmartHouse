@@ -30,12 +30,12 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public final class SpeechActivity extends BaseActivity implements Callback<SpeechResponseBean> {
+public final class MessageActivity extends BaseActivity implements Callback<SpeechResponseBean> {
 
     @InjectView(R.id.activity_speech_reponse_edittext)
     protected MaterialEditText mResponseEditText;
 
-    @InjectView(R.id.activity_speech_toolbar)
+    @InjectView(R.id.activity_message_toolbar)
     protected Toolbar mToolbar;
 
     private SpeechListAdapter mAdapter;
@@ -44,7 +44,7 @@ public final class SpeechActivity extends BaseActivity implements Callback<Speec
     @NonNull
     @Override
     protected int getLayoutResource() {
-        return R.layout.layout_speech;
+        return R.layout.layout_message;
     }
 
     @Override

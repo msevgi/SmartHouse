@@ -31,7 +31,7 @@
 
         <!-- Speech Activity ! -->
         <activity
-            android:name="com.msevgi.smarthouse.activity.SpeechActivity"
+            android:name=".activity.MessageActivity"
             android:label="@string/title_activity_speech"
             android:theme="@style/SpeechTheme"/>
 

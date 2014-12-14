@@ -5,29 +5,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.msevgi.smarthouse.activity.SpeechActivity">
+    tools:context="com.msevgi.smarthouse.activity.MessageActivity">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/activity_speech_toolbar"
+        android:id="@+id/activity_message_toolbar"
         android:layout_width="match_parent"
         android:layout_height="112dp"
         android:background="#FAFAFA"
         style="@style/style_toolbar"/>
 
-    <com.melnykov.fab.FloatingActionButton
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@drawable/drawable_shadow"
+        android:layout_below="@+id/activity_message_toolbar"/>
+
+    <com.getbase.floatingactionbutton.FloatingActionButton
         android:id="@+id/activity_speech_accept_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_check"
-        android:layout_below="@+id/activity_speech_toolbar"
+        android:layout_below="@+id/activity_message_toolbar"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="-26dp"
+        android:layout_marginTop="-32dp"
         android:transitionName="button"
-        fab:fab_colorNormal="@color/color_speech_fab_normal"
-        fab:fab_colorPressed="@color/color_speech_fab_pressed"
-        fab:fab_colorRipple="@color/color_speech_fab_ripple"/>
+        fab:fab_colorNormal="@color/color_message_fab_normal"
+        fab:fab_colorPressed="@color/color_message_fab_pressed"/>
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/activity_speech_reponse_edittext"
@@ -44,11 +49,5 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
         android:layout_below="@+id/activity_speech_accept_button"
         android:layout_margin="16dp"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:background="@drawable/drawable_shadow"
-        android:layout_below="@+id/activity_speech_toolbar"/>
 
 </RelativeLayout>

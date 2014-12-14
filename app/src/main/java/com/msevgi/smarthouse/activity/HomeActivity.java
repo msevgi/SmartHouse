@@ -29,7 +29,6 @@ public final class HomeActivity extends BaseActivity {
     protected DrawerLayout mDrawerLayout;
 
     private NavigationDrawerFragment mNavigationDrawerFragment;
-    private int mCurrentPosition = -1;
 
     @NonNull
     @Override
@@ -57,10 +56,8 @@ public final class HomeActivity extends BaseActivity {
     @Subscribe
     public void onNavigationDrawerItemSelected(NavigationItemSelectEvent event) {
         int position = event.getPosition();
-        if (mCurrentPosition == position)
+        if (NavigationHelper.getPosition() == position)
             return;
-
-//        NavigationHelper.setTitle(getTitle());
 
         switch (position) {
             case BellFragment.POSITION:
@@ -86,7 +83,7 @@ public final class HomeActivity extends BaseActivity {
                 break;
         }
 
-        mCurrentPosition = position;
+        NavigationHelper.setPosition(position);
     }
 
     @Override

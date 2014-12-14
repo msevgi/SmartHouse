@@ -11,16 +11,32 @@
         android:clickable="true"
         android:divider="@android:color/transparent"/>
 
-    <com.melnykov.fab.FloatingActionButton
+    <com.msevgi.smarthouse.view.ExtendedFloatingActionMenu
         xmlns:fab="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/fragment_bell_response_button"
+        android:id="@+id/fragment_bell_response_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         android:layout_margin="16dp"
         android:src="@drawable/ic_reply"
-        fab:fab_colorNormal="@color/color_home_fab_normal"
-        fab:fab_colorPressed="@color/color_home_fab_pressed"
-        fab:fab_colorRipple="@color/color_home_fab_ripple"/>
+        fab:fab_addButtonColorNormal="@color/color_home_fab_normal"
+        fab:fab_addButtonColorPressed="@color/color_home_fab_pressed">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fragment_bell_response_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_title="Message"
+            fab:fab_colorNormal="@color/color_home_fab_normal"
+            fab:fab_colorPressed="@color/color_home_fab_pressed"/>
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fragment_bell_response_voice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_title="Voice"
+            fab:fab_colorNormal="@color/color_home_fab_normal"
+            fab:fab_colorPressed="@color/color_home_fab_pressed"/>
+    </com.msevgi.smarthouse.view.ExtendedFloatingActionMenu>
 </FrameLayout>
 

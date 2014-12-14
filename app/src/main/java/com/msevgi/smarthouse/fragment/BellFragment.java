@@ -11,12 +11,12 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.github.mrengineer13.snackbar.SnackBar;
-import com.melnykov.fab.FloatingActionButton;
 import com.msevgi.smarthouse.R;
-import com.msevgi.smarthouse.activity.SpeechActivity;
+import com.msevgi.smarthouse.activity.MessageActivity;
 import com.msevgi.smarthouse.adapter.BellListAdapter;
 import com.msevgi.smarthouse.content.SmartHouseContentProvider;
 import com.msevgi.smarthouse.event.NewBellEvent;
+import com.msevgi.smarthouse.view.ExtendedFloatingActionMenu;
 import com.squareup.otto.Subscribe;
 
 import butterknife.InjectView;
@@ -25,8 +25,8 @@ import butterknife.OnClick;
 public final class BellFragment extends BaseFragment implements Runnable, SnackBar.OnVisibilityChangeListener {
     public static final int POSITION = 0;
 
-    @InjectView(R.id.fragment_bell_response_button)
-    protected FloatingActionButton mResponseButton;
+    @InjectView(R.id.fragment_bell_response_menu)
+    protected ExtendedFloatingActionMenu mResponseMenu;
 
     @InjectView(R.id.fragment_bell_listview)
     protected ListView mListView;
@@ -53,14 +53,16 @@ public final class BellFragment extends BaseFragment implements Runnable, SnackB
         BellListAdapter mAdapter = new BellListAdapter(getContext(), mCursor);
         mListView.setAdapter(mAdapter);
 
-        mResponseButton.attachToListView(mListView);
+        mResponseMenu.attachToListView(mListView);
     }
 
-    @OnClick(R.id.fragment_bell_response_button)
+    @OnClick(R.id.fragment_bell_response_message)
     public void onResponseButtonClicked(View view) {
-        Intent mIntent = new Intent(getContext(), SpeechActivity.class);
+        Intent mIntent = new Intent(getContext(), MessageActivity.class);
         ActivityOptionsCompat mOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), view, "button");
         ActivityCompat.startActivity(getActivity(), mIntent, mOptions.toBundle());
+
+        mResponseMenu.postCollapse();
     }
 
     @Subscribe
@@ -79,11 +81,11 @@ public final class BellFragment extends BaseFragment implements Runnable, SnackB
 
     @Override
     public void onShow(int i) {
-        mResponseButton.hide();
+        mResponseMenu.hide(false);
     }
 
     @Override
     public void onHide(int i) {
-        mResponseButton.show();
+        mResponseMenu.show(false);
     }
 }
