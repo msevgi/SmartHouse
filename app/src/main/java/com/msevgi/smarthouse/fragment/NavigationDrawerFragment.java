@@ -96,7 +96,7 @@ public final class NavigationDrawerFragment extends BaseFragment {
         mDrawerLayout.setDrawerListener(mActionBarDrawerToggle);
     }
 
-    public void selectItem(int position) {
+    public void navigate(int position) {
         NavigationItemSelectEvent mEvent = new NavigationItemSelectEvent();
         mEvent.setPosition(position);
         BusProvider.getInstance().post(mEvent);
