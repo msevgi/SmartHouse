@@ -51,7 +51,7 @@ public final class NavigationDrawerFragment extends BaseFragment {
         mDrawerList.setHasFixedSize(true);
 
         List<NavigationItem> mNavigationItems = getMenu();
-        NavigationDrawerListAdapter mAdapter = new NavigationDrawerListAdapter(mNavigationItems);
+        NavigationDrawerListAdapter mAdapter = new NavigationDrawerListAdapter(mNavigationItems, getContext());
         mDrawerList.setAdapter(mAdapter);
         selectItem(NavigationHelper.getPosition());
         super.onViewCreated(view, savedInstanceState);
@@ -108,9 +108,9 @@ public final class NavigationDrawerFragment extends BaseFragment {
 
     public List<NavigationItem> getMenu() {
         List<NavigationItem> items = new ArrayList<NavigationItem>();
-        items.add(new NavigationItem("Bells", getResources().getDrawable(R.drawable.ic_home)));
-        items.add(new NavigationItem("Snapshot", getResources().getDrawable(R.drawable.ic_snapshot)));
-        items.add(new NavigationItem("Settings", getResources().getDrawable(R.drawable.ic_settings)));
+        items.add(new NavigationItem(R.string.title_bell, getResources().getDrawable(R.drawable.ic_home)));
+        items.add(new NavigationItem(R.string.title_snapshot, getResources().getDrawable(R.drawable.ic_snapshot)));
+        items.add(new NavigationItem(R.string.title_settings, getResources().getDrawable(R.drawable.ic_settings)));
         return items;
     }
 

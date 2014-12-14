@@ -1,5 +1,6 @@
 package com.msevgi.smarthouse.adapter;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,10 +19,12 @@ import java.util.List;
 public final class NavigationDrawerListAdapter extends RecyclerView.Adapter<NavigationDrawerListAdapter.ViewHolder> {
 
     private List<NavigationItem> mData;
+    private Context mContext;
     private int mSelectedPosition;
     private int mTouchedPosition = -1;
 
-    public NavigationDrawerListAdapter(List<NavigationItem> data) {
+    public NavigationDrawerListAdapter(List<NavigationItem> data, Context context) {
+        mContext = context;
         mData = data;
     }
 
@@ -33,7 +36,9 @@ public final class NavigationDrawerListAdapter extends RecyclerView.Adapter<Navi
 
     @Override
     public void onBindViewHolder(NavigationDrawerListAdapter.ViewHolder viewHolder, final int position) {
-        viewHolder.textView.setText(mData.get(position).getText());
+        int mTextResourceId = mData.get(position).getTextResource();
+        String mTitle = mContext.getResources().getString(mTextResourceId);
+        viewHolder.textView.setText(mTitle);
         viewHolder.textView.setCompoundDrawablesWithIntrinsicBounds(mData.get(position).getDrawable(), null, null, null);
         viewHolder.itemView.setOnTouchListener(new View.OnTouchListener() {
                                                    @Override
