@@ -6,22 +6,25 @@ import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.msevgi.smarthouse.helper.NavigationHelper;
 import com.msevgi.smarthouse.provider.BusProvider;
 
 import butterknife.ButterKnife;
 
 abstract class BaseFragment extends Fragment {
-
+    protected static final int NO_ID = -1;
     private Context mContext;
 
     @Override
     public void onAttach(Activity activity) {
         BusProvider.getInstance().register(this);
+        setTitle();
         super.onAttach(activity);
     }
 
@@ -51,6 +54,19 @@ abstract class BaseFragment extends Fragment {
 
         return mContext;
     }
+
+    private void setTitle() {
+        if (getTitleResource() == NO_ID)
+            return;
+
+        getActivity().setTitle(getTitleResource());
+        NavigationHelper.setTitle(getActivity().getTitle());
+    }
+
+    protected abstract
+    @NonNull
+    @StringRes
+    int getTitleResource();
 
     protected abstract
     @NonNull

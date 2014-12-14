@@ -33,6 +33,12 @@ public final class BellFragment extends BaseFragment implements Runnable, SnackB
 
     @NonNull
     @Override
+    protected int getTitleResource() {
+        return R.string.title_bell;
+    }
+
+    @NonNull
+    @Override
     protected int getLayoutResource() {
         return R.layout.fragment_bell;
     }

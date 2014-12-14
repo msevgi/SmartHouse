@@ -24,6 +24,12 @@ public final class SnapshotFragment extends BaseFragment {
 
     @NonNull
     @Override
+    protected int getTitleResource() {
+        return R.string.title_snapshot;
+    }
+
+    @NonNull
+    @Override
     protected int getLayoutResource() {
         return R.layout.fragment_snapshot;
     }

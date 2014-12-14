@@ -1,7 +1,5 @@
 package com.msevgi.smarthouse.fragment;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,6 +13,7 @@ import android.view.View;
 import com.msevgi.smarthouse.R;
 import com.msevgi.smarthouse.adapter.NavigationDrawerListAdapter;
 import com.msevgi.smarthouse.event.NavigationItemSelectEvent;
+import com.msevgi.smarthouse.helper.NavigationHelper;
 import com.msevgi.smarthouse.model.NavigationItem;
 import com.squareup.otto.Subscribe;
 
@@ -24,18 +23,18 @@ import java.util.List;
 import butterknife.InjectView;
 
 public final class NavigationDrawerFragment extends BaseFragment {
-    private static final String PREF_USER_LEARNED_DRAWER = "navigation_drawer_learned";
-    private static final String STATE_SELECTED_POSITION = "selected_navigation_drawer_position";
-    private static final String PREFERENCES_FILE = "my_app_settings"; //TODO: change this to your file
     private View mFragmentContainerView;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mActionBarDrawerToggle;
-    private boolean mUserLearnedDrawer;
-    private boolean mFromSavedInstanceState;
-    private int mCurrentSelectedPosition;
 
     @InjectView(R.id.fragment_navigation_drawer_list)
     protected RecyclerView mDrawerList;
+
+    @NonNull
+    @Override
+    protected int getTitleResource() {
+        return NO_ID;
+    }
 
     @NonNull
     @Override
@@ -54,18 +53,8 @@ public final class NavigationDrawerFragment extends BaseFragment {
         List<NavigationItem> mNavigationItems = getMenu();
         NavigationDrawerListAdapter mAdapter = new NavigationDrawerListAdapter(mNavigationItems);
         mDrawerList.setAdapter(mAdapter);
-        selectItem(mCurrentSelectedPosition);
+        selectItem(NavigationHelper.getPosition());
         super.onViewCreated(view, savedInstanceState);
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mUserLearnedDrawer = Boolean.valueOf(readSharedSetting(getActivity(), PREF_USER_LEARNED_DRAWER, "false"));
-        if (savedInstanceState != null) {
-            mCurrentSelectedPosition = savedInstanceState.getInt(STATE_SELECTED_POSITION);
-            mFromSavedInstanceState = true;
-        }
     }
 
     public ActionBarDrawerToggle getActionBarDrawerToggle() {
@@ -85,23 +74,20 @@ public final class NavigationDrawerFragment extends BaseFragment {
                 super.onDrawerClosed(drawerView);
                 if (!isAdded()) return;
                 getActivity().invalidateOptionsMenu();
+
+                CharSequence mTitle = NavigationHelper.getTitle();
+                getActivity().setTitle(mTitle);
             }
 
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
                 if (!isAdded()) return;
-                if (!mUserLearnedDrawer) {
-                    mUserLearnedDrawer = true;
-                    saveSharedSetting(getActivity(), PREF_USER_LEARNED_DRAWER, "true");
-                }
-
                 getActivity().invalidateOptionsMenu();
+
+                getActivity().setTitle(R.string.app_name);
             }
         };
-
-        if (!mUserLearnedDrawer && !mFromSavedInstanceState)
-            mDrawerLayout.openDrawer(mFragmentContainerView);
 
         mDrawerLayout.post(new Runnable() {
             @Override
@@ -109,7 +95,6 @@ public final class NavigationDrawerFragment extends BaseFragment {
                 mActionBarDrawerToggle.syncState();
             }
         });
-
         mDrawerLayout.setDrawerListener(mActionBarDrawerToggle);
     }
 
@@ -130,7 +115,6 @@ public final class NavigationDrawerFragment extends BaseFragment {
     }
 
     void selectItem(int position) {
-        mCurrentSelectedPosition = position;
         if (mDrawerLayout != null)
             mDrawerLayout.closeDrawer(mFragmentContainerView);
 
@@ -147,12 +131,6 @@ public final class NavigationDrawerFragment extends BaseFragment {
         mActionBarDrawerToggle.onConfigurationChanged(newConfig);
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putInt(STATE_SELECTED_POSITION, mCurrentSelectedPosition);
-    }
-
     @Subscribe
     public void onNavigationDrawerItemSelected(NavigationItemSelectEvent event) {
         int position = event.getPosition();
@@ -165,17 +143,5 @@ public final class NavigationDrawerFragment extends BaseFragment {
 
     public void setDrawerLayout(DrawerLayout drawerLayout) {
         mDrawerLayout = drawerLayout;
-    }
-
-    public static void saveSharedSetting(Context ctx, String settingName, String settingValue) {
-        SharedPreferences sharedPref = ctx.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString(settingName, settingValue);
-        editor.apply();
-    }
-
-    public static String readSharedSetting(Context ctx, String settingName, String defaultValue) {
-        SharedPreferences sharedPref = ctx.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
-        return sharedPref.getString(settingName, defaultValue);
     }
 }
