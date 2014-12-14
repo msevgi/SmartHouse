@@ -1,19 +1,12 @@
-<LinearLayout
+<TextView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cell_drawer_textview"
+    android:layout_width="match_parent"
     android:layout_height="48dp"
-    android:layout_width="match_parent">
-
-    <TextView
-        android:id="@+id/item_name"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginRight="16dp"
-        android:drawablePadding="16dp"
-        android:layout_marginEnd="16dp"
-        android:textSize="14sp"
-        android:alpha="0.87"
-        android:gravity="center_vertical"
-        android:textColor="#000000"/>
-</LinearLayout>
+    android:drawablePadding="16dp"
+    android:paddingLeft="16dp"
+    android:textSize="14sp"
+    android:alpha="0.87"
+    android:gravity="center_vertical"
+    android:background="@drawable/selector_cell_drawer"
+    android:textColor="#000000"/>

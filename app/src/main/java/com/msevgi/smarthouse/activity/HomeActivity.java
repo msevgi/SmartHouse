@@ -14,7 +14,6 @@ import com.msevgi.smarthouse.fragment.NavigationDrawerFragment;
 import com.msevgi.smarthouse.fragment.SettingsFragment;
 import com.msevgi.smarthouse.fragment.SnapshotFragment;
 import com.msevgi.smarthouse.helper.NavigationHelper;
-import com.msevgi.smarthouse.provider.BusProvider;
 import com.msevgi.smarthouse.task.GcmRegisterAsyncTask;
 import com.squareup.otto.Subscribe;
 
@@ -45,10 +44,7 @@ public final class HomeActivity extends BaseActivity {
 
         mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.activity_home_fragment_drawer);
         mNavigationDrawerFragment.setup(R.id.activity_home_fragment_drawer, mDrawerLayout, mToolbar);
-
-        NavigationItemSelectEvent mEvent = new NavigationItemSelectEvent();
-        mEvent.setPosition(BellFragment.POSITION);
-        BusProvider.getInstance().post(mEvent);
+        mNavigationDrawerFragment.selectItem(BellFragment.POSITION);
 
         new GcmRegisterAsyncTask(this).execute();
     }

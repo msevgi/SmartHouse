@@ -1,4 +1,4 @@
-<android.support.v7.widget.RecyclerView
+<ListView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/fragment_navigation_drawer_list"
     android:layout_width="match_parent"
@@ -7,4 +7,6 @@
     android:focusableInTouchMode="true"
     android:scrollbars="vertical"
     android:focusable="true"
+    android:choiceMode="singleChoice"
+    android:listSelector="@drawable/selector_cell_drawer"
     android:background="@color/color_drawer_background"/>

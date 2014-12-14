@@ -52,7 +52,7 @@ public final class SpeechListAdapter extends CursorAdapter {
         @InjectView(R.id.cell_speech_textview)
         SpeechTextView mSpeechTextView;
 
-        public ViewHolder(View view) {
+        protected ViewHolder(View view) {
             ButterKnife.inject(this, view);
         }
 

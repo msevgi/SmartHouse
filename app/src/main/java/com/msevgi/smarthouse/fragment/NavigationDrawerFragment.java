@@ -3,32 +3,34 @@ package com.msevgi.smarthouse.fragment;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ListView;
 
 import com.msevgi.smarthouse.R;
 import com.msevgi.smarthouse.adapter.NavigationDrawerListAdapter;
 import com.msevgi.smarthouse.event.NavigationItemSelectEvent;
 import com.msevgi.smarthouse.helper.NavigationHelper;
 import com.msevgi.smarthouse.model.NavigationItem;
-import com.squareup.otto.Subscribe;
+import com.msevgi.smarthouse.provider.BusProvider;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.InjectView;
+import butterknife.OnItemClick;
 
 public final class NavigationDrawerFragment extends BaseFragment {
+
+    @InjectView(R.id.fragment_navigation_drawer_list)
+    protected ListView mDrawerList;
+
     private View mFragmentContainerView;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mActionBarDrawerToggle;
-
-    @InjectView(R.id.fragment_navigation_drawer_list)
-    protected RecyclerView mDrawerList;
 
     @NonNull
     @Override
@@ -43,26 +45,22 @@ public final class NavigationDrawerFragment extends BaseFragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-        mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-
-        mDrawerList.setLayoutManager(mLayoutManager);
-        mDrawerList.setHasFixedSize(true);
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         List<NavigationItem> mNavigationItems = getMenu();
-        NavigationDrawerListAdapter mAdapter = new NavigationDrawerListAdapter(mNavigationItems, getContext());
+        NavigationDrawerListAdapter mAdapter = new NavigationDrawerListAdapter(getContext(), mNavigationItems);
         mDrawerList.setAdapter(mAdapter);
-        selectItem(NavigationHelper.getPosition());
-        super.onViewCreated(view, savedInstanceState);
     }
 
-    public ActionBarDrawerToggle getActionBarDrawerToggle() {
-        return mActionBarDrawerToggle;
-    }
+    @OnItemClick(R.id.fragment_navigation_drawer_list)
+    public void onDrawerListItemSelected(int position) {
+        NavigationItemSelectEvent mEvent = new NavigationItemSelectEvent();
+        mEvent.setPosition(position);
+        BusProvider.getInstance().post(mEvent);
 
-    public void setActionBarDrawerToggle(ActionBarDrawerToggle actionBarDrawerToggle) {
-        mActionBarDrawerToggle = actionBarDrawerToggle;
+        closeDrawer();
+        mDrawerList.setItemChecked(position, true);
     }
 
     public void setup(int fragmentId, DrawerLayout drawerLayout, Toolbar toolbar) {
@@ -98,6 +96,14 @@ public final class NavigationDrawerFragment extends BaseFragment {
         mDrawerLayout.setDrawerListener(mActionBarDrawerToggle);
     }
 
+    public void selectItem(int position) {
+        NavigationItemSelectEvent mEvent = new NavigationItemSelectEvent();
+        mEvent.setPosition(position);
+        BusProvider.getInstance().post(mEvent);
+
+        mDrawerList.setItemChecked(position, true);
+    }
+
     public void openDrawer() {
         mDrawerLayout.openDrawer(mFragmentContainerView);
     }
@@ -106,19 +112,12 @@ public final class NavigationDrawerFragment extends BaseFragment {
         mDrawerLayout.closeDrawer(mFragmentContainerView);
     }
 
-    public List<NavigationItem> getMenu() {
+    private List<NavigationItem> getMenu() {
         List<NavigationItem> items = new ArrayList<NavigationItem>();
-        items.add(new NavigationItem(R.string.title_bell, getResources().getDrawable(R.drawable.ic_home)));
-        items.add(new NavigationItem(R.string.title_snapshot, getResources().getDrawable(R.drawable.ic_snapshot)));
-        items.add(new NavigationItem(R.string.title_settings, getResources().getDrawable(R.drawable.ic_settings)));
+        items.add(new NavigationItem(R.string.title_bell, R.drawable.ic_home));
+        items.add(new NavigationItem(R.string.title_snapshot, R.drawable.ic_snapshot));
+        items.add(new NavigationItem(R.string.title_settings, R.drawable.ic_settings));
         return items;
-    }
-
-    void selectItem(int position) {
-        if (mDrawerLayout != null)
-            mDrawerLayout.closeDrawer(mFragmentContainerView);
-
-        ((NavigationDrawerListAdapter) mDrawerList.getAdapter()).selectPosition(position);
     }
 
     public boolean isDrawerOpen() {
@@ -131,17 +130,4 @@ public final class NavigationDrawerFragment extends BaseFragment {
         mActionBarDrawerToggle.onConfigurationChanged(newConfig);
     }
 
-    @Subscribe
-    public void onNavigationDrawerItemSelected(NavigationItemSelectEvent event) {
-        int position = event.getPosition();
-        selectItem(position);
-    }
-
-    public DrawerLayout getDrawerLayout() {
-        return mDrawerLayout;
-    }
-
-    public void setDrawerLayout(DrawerLayout drawerLayout) {
-        mDrawerLayout = drawerLayout;
-    }
 }

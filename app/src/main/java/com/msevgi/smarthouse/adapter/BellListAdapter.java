@@ -70,7 +70,7 @@ public final class BellListAdapter extends CursorAdapter {
         @InjectView(R.id.cell_bell_time_textview)
         TextView mDateTextView;
 
-        public ViewHolder(View view) {
+        protected ViewHolder(View view) {
             ButterKnife.inject(this, view);
         }
     }

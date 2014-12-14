@@ -1,17 +1,25 @@
 package com.msevgi.smarthouse.model;
 
-import android.graphics.drawable.Drawable;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 
 public final class NavigationItem {
+
     private
+    @NonNull
     @StringRes
     int mTextResource;
-    private Drawable mDrawable;
 
-    public NavigationItem(@StringRes int textResource, Drawable drawable) {
+
+    private
+    @NonNull
+    @DrawableRes
+    int mDrawableResource;
+
+    public NavigationItem(@NonNull @StringRes int textResource, @NonNull @DrawableRes int drawableResource) {
         mTextResource = textResource;
-        mDrawable = drawable;
+        mDrawableResource = drawableResource;
     }
 
     public
@@ -24,11 +32,12 @@ public final class NavigationItem {
         mTextResource = textResource;
     }
 
-    public Drawable getDrawable() {
-        return mDrawable;
+    @NonNull
+    public int getDrawableResource() {
+        return mDrawableResource;
     }
 
-    public void setDrawable(Drawable drawable) {
-        mDrawable = drawable;
+    public void setDrawableResource(@NonNull @DrawableRes int drawableResource) {
+        mDrawableResource = drawableResource;
     }
 }
