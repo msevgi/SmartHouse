@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:gravity="right"
-            android:drawableLeft="@drawable/ic_time"
+            android:drawableLeft="@drawable/ic_clock"
             android:textColor="@android:color/darker_gray"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
     </LinearLayout>

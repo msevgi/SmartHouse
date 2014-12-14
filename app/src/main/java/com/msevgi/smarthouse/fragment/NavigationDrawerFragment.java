@@ -123,9 +123,9 @@ public final class NavigationDrawerFragment extends BaseFragment {
 
     public List<NavigationItem> getMenu() {
         List<NavigationItem> items = new ArrayList<NavigationItem>();
-        items.add(new NavigationItem("item 1", getResources().getDrawable(R.drawable.ic_launcher)));
-        items.add(new NavigationItem("item 2", getResources().getDrawable(R.drawable.ic_launcher)));
-        items.add(new NavigationItem("item 3", getResources().getDrawable(R.drawable.ic_launcher)));
+        items.add(new NavigationItem("Home", getResources().getDrawable(R.drawable.ic_home)));
+        items.add(new NavigationItem("Snapshot", getResources().getDrawable(R.drawable.ic_snapshot)));
+        items.add(new NavigationItem("Settings", getResources().getDrawable(R.drawable.ic_settings)));
         return items;
     }
 
