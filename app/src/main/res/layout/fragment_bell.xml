@@ -18,7 +18,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         android:layout_margin="16dp"
-        android:src="@drawable/ic_reply"
         fab:fab_addButtonColorNormal="@color/color_home_fab_normal"
         fab:fab_addButtonColorPressed="@color/color_home_fab_pressed">
 
@@ -27,6 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             fab:fab_title="Message"
+            fab:fab_icon="@drawable/ic_message"
             fab:fab_colorNormal="@color/color_home_fab_normal"
             fab:fab_colorPressed="@color/color_home_fab_pressed"/>
 
@@ -35,6 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             fab:fab_title="Voice"
+            fab:fab_icon="@drawable/ic_voice"
             fab:fab_colorNormal="@color/color_home_fab_normal"
             fab:fab_colorPressed="@color/color_home_fab_pressed"/>
     </com.msevgi.smarthouse.view.ExtendedFloatingActionMenu>
