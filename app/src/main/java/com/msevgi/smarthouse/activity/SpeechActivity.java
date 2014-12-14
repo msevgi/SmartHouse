@@ -18,6 +18,7 @@ import com.msevgi.smarthouse.bean.SpeechResponseBean;
 import com.msevgi.smarthouse.content.SmartHouseContentProvider;
 import com.msevgi.smarthouse.event.SpeechItemSelectEvent;
 import com.msevgi.smarthouse.interfaces.SpeechRestInterface;
+import com.msevgi.smarthouse.model.Language;
 import com.msevgi.smarthouse.provider.RestAdapterProvider;
 import com.msevgi.smarthouse.util.AndroidUtil;
 import com.rengwuxian.materialedittext.MaterialEditText;
@@ -103,6 +104,7 @@ public final class SpeechActivity extends BaseActivity implements Callback<Speec
         mResponseInterface.send(mRequestBean, this);
 
         SmartHouseContentProvider.Speech mSpeech = new SmartHouseContentProvider.Speech();
+        mSpeech.setLanguage(Language.TR);
         mSpeech.setContent(mSpeechString);
 
         Uri mSpeechUri = SmartHouseContentProvider.getSpeechUri();

@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 
 import com.msevgi.smarthouse.constant.ApplicationConstants;
+import com.msevgi.smarthouse.model.Language;
 
 import java.io.ByteArrayOutputStream;
 
@@ -115,7 +116,11 @@ public final class SmartHouseContentProvider extends AbstractProvider {
         @Column(value = Column.FieldType.TEXT)
         public static final String KEY_CONTENT = "content";
 
+        @Column(value = Column.FieldType.TEXT)
+        public static final String KEY_LANGUAGE = "language";
+
         private String mContent;
+        private String mLanguage;
 
         public String getContent() {
             return mContent;
@@ -125,9 +130,14 @@ public final class SmartHouseContentProvider extends AbstractProvider {
             mContent = content;
         }
 
+        public void setLanguage(Language language) {
+            mLanguage = language.toString();
+        }
+
         public ContentValues toContentValues() {
             ContentValues mContentValues = new ContentValues();
             mContentValues.put(KEY_CONTENT, mContent);
+            mContentValues.put(KEY_LANGUAGE, mLanguage);
             return mContentValues;
         }
     }
