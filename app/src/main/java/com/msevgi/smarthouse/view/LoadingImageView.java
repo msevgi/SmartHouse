@@ -4,14 +4,16 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 
 import com.msevgi.smarthouse.R;
 import com.pnikosis.materialishprogress.ProgressWheel;
 
+import it.sephiroth.android.library.imagezoom.ImageViewTouch;
+import it.sephiroth.android.library.imagezoom.ImageViewTouchBase;
+
 public final class LoadingImageView extends FrameLayout {
-    private ImageView mImageView;
-    private ProgressWheel mProgressWhell;
+    private ImageViewTouch mImageView;
+    private ProgressWheel mProgressWheel;
 
     public LoadingImageView(Context context) {
         super(context);
@@ -34,8 +36,10 @@ public final class LoadingImageView extends FrameLayout {
     private void init() {
         inflate(getContext(), R.layout.segment_loading_imageview, this);
 
-        mImageView = (ImageView) findViewById(R.id.segment_loading_imageview_imageview);
-        mProgressWhell = (ProgressWheel) findViewById(R.id.segment_loading_imageview_progress);
+        mImageView = (ImageViewTouch) findViewById(R.id.segment_loading_imageview_imageview);
+        mProgressWheel = (ProgressWheel) findViewById(R.id.segment_loading_imageview_progress);
+
+        mImageView.setDisplayType(ImageViewTouchBase.DisplayType.FIT_TO_SCREEN);
     }
 
     public void setImageBitmap(Bitmap bitmap) {
@@ -43,10 +47,10 @@ public final class LoadingImageView extends FrameLayout {
     }
 
     public void showProgress() {
-        mProgressWhell.setVisibility(VISIBLE);
+        mProgressWheel.setVisibility(VISIBLE);
     }
 
     public void hideProgress() {
-        mProgressWhell.setVisibility(GONE);
+        mProgressWheel.setVisibility(GONE);
     }
 }
