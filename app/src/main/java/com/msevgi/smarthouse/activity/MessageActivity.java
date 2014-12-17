@@ -77,12 +77,13 @@ public final class MessageActivity extends BaseActivity implements Callback<Spee
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
-                break;
+                return true;
             case R.id.action_template:
                 mDialog.show();
-                break;
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     @Subscribe
