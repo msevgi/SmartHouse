@@ -2,6 +2,8 @@ package com.msevgi.smarthouse.adapter;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +13,6 @@ import android.widget.TextView;
 
 import com.msevgi.smarthouse.R;
 import com.msevgi.smarthouse.content.SmartHouseContentProvider;
-import com.squareup.picasso.Picasso;
 
 import org.ocpsoft.prettytime.PrettyTime;
 
@@ -26,7 +27,7 @@ public final class BellListAdapter extends CursorAdapter {
     private PrettyTime mPrettyTime;
 
     private int mTimestampIndex;
-    private int mUrlIndex;
+    private int mBitmapIndex;
 
     public BellListAdapter(Context context, Cursor cursor) {
         super(context, cursor);
@@ -34,7 +35,7 @@ public final class BellListAdapter extends CursorAdapter {
         mPrettyTime = new PrettyTime();
 
         mTimestampIndex = cursor.getColumnIndex(SmartHouseContentProvider.Bell.KEY_TIME_STAMP);
-        mUrlIndex = cursor.getColumnIndex(SmartHouseContentProvider.Bell.KEY_URL);
+        mBitmapIndex = cursor.getColumnIndex(SmartHouseContentProvider.Bell.KEY_BITMAP);
     }
 
     @Override
@@ -55,11 +56,9 @@ public final class BellListAdapter extends CursorAdapter {
         String mTime = mPrettyTime.format(mDate);
         mViewHolder.mDateTextView.setText(mTime);
 
-        String mUrl = cursor.getString(mUrlIndex);
-        Picasso
-                .with(context)
-                .load(mUrl)
-                .into(mViewHolder.mImageView);
+        byte[] mByteArray = cursor.getBlob(mBitmapIndex);
+        Bitmap mBitmap = BitmapFactory.decodeByteArray(mByteArray, 0, mByteArray.length);
+        mViewHolder.mImageView.setImageBitmap(mBitmap);
     }
 
     protected static class ViewHolder {

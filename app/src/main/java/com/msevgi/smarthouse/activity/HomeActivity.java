@@ -45,6 +45,8 @@ public final class HomeActivity extends BaseActivity {
         mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.activity_home_fragment_drawer);
         mNavigationDrawerFragment.setup(R.id.activity_home_fragment_drawer, mDrawerLayout, mToolbar);
         mNavigationDrawerFragment.navigate(BellFragment.POSITION);
+
+        new GcmRegisterAsyncTask(this).execute();
     }
 
     @Subscribe

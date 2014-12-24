@@ -99,7 +99,7 @@ public final class MessageActivity extends BaseActivity implements Callback<Spee
         String mSpeechString = mResponseEditText.getText().toString();
 
         SpeechRequestBean mRequestBean = new SpeechRequestBean(mSpeechString);
-        mRequestBean.setLanguage("EN");
+        mRequestBean.setLanguage("TR");
 
         SpeechRestInterface mResponseInterface = RestAdapterProvider.getInstance().create(SpeechRestInterface.class);
         mResponseInterface.send(mRequestBean, this);

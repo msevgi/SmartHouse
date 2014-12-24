@@ -46,19 +46,12 @@ public final class SmartHouseContentProvider extends AbstractProvider {
         @Column(value = Column.FieldType.INTEGER, primaryKey = true, unique = true)
         public static final String KEY_ID = "_id";
 
-        @Column(value = Column.FieldType.INTEGER)
-        public static final String KEY_PHOTO_ID = "photo_id";
-
         @Column(Column.FieldType.INTEGER)
         public static final String KEY_TIME_STAMP = "time_stamp";
-
-        @Column(Column.FieldType.TEXT)
-        public static final String KEY_URL = "url";
 
         @Column(Column.FieldType.BLOB)
         public static final String KEY_BITMAP = "bitmap";
 
-        private String mPhotoId;
         private long mTimestamp;
         private Bitmap mBitmap;
 
@@ -78,30 +71,15 @@ public final class SmartHouseContentProvider extends AbstractProvider {
             mBitmap = bitmap;
         }
 
-        public String getPhotoId() {
-            return mPhotoId;
-        }
-
-        public void setPhotoId(String photoId) {
-            this.mPhotoId = photoId;
-        }
-
         private byte[] getByteArray() {
             ByteArrayOutputStream mOutputStream = new ByteArrayOutputStream();
             mBitmap.compress(Bitmap.CompressFormat.PNG, 100, mOutputStream);
             return mOutputStream.toByteArray();
         }
 
-        private String getUrl() {
-            String mUrl = ApplicationConstants.REST_VISITOR_PHOTO.concat(mPhotoId);
-            return mUrl;
-        }
-
         public ContentValues toContentValues() {
             ContentValues mContentValues = new ContentValues();
             mContentValues.put(KEY_TIME_STAMP, mTimestamp);
-            mContentValues.put(KEY_PHOTO_ID, mPhotoId);
-            mContentValues.put(KEY_URL, getUrl());
             mContentValues.put(KEY_BITMAP, getByteArray());
             return mContentValues;
         }
