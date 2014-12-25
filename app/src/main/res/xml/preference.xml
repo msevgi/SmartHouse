@@ -1,10 +1,20 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- IP Address !-->
     <PreferenceCategory
-        android:title="Server"
-        android:key="pref_key_server_settings">
+        android:title="Server">
         <EditTextPreference
             android:title="IP Address"
             android:key="pref_key_server_address"/>
     </PreferenceCategory>
+
+    <!-- Message !-->
+    <PreferenceCategory
+        android:title="Message">
+        <CheckBoxPreference
+            android:title="Send message"
+            android:key="pref_key_message"/>
+    </PreferenceCategory>
+
 </PreferenceScreen>

@@ -4,9 +4,11 @@
         <item name="colorPrimary">@color/color_home_primary</item>
         <item name="colorPrimaryDark">@color/color_home_primary_dark</item>
         <item name="colorAccent">@color/color_home_accent</item>
+        
         <item name="android:textColorPrimary">@color/color_text_primary</item>
-        <item name="drawerArrowStyle">@style/style_drawer_arrow</item>
+        <item name="android:textColor">@android:color/black</item>
 
+        <item name="drawerArrowStyle">@style/style_drawer_arrow</item>
         <item name="android:windowBackground">@color/color_window_background</item>
     </style>
 
@@ -14,6 +16,7 @@
         <item name="colorPrimary">@color/color_message_primary</item>
         <item name="colorPrimaryDark">@color/color_message_primary_dark</item>
         <item name="colorAccent">@color/color_message_accent</item>
+        
         <item name="android:textColorPrimary">@color/color_text_primary</item>
 
         <item name="android:windowBackground">@color/color_window_background</item>
