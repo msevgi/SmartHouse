@@ -4,9 +4,8 @@
     <!-- IP Address !-->
     <PreferenceCategory
         android:title="Server">
-        <EditTextPreference
-            android:title="IP Address"
-            android:key="pref_key_server_address"/>
+        <com.msevgi.smarthouse.config.IPAddressConfig
+            android:title="IP Address"/>
     </PreferenceCategory>
 
     <!-- Message !-->

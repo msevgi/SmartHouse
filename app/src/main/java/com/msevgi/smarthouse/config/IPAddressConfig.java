@@ -25,11 +25,15 @@ public final class IPAddressConfig extends EditTextPreference implements Prefere
     }
 
     private void init() {
+        String mDefaultValue = ConfiguratorProvider.getInstance(getContext()).IpAddress().getOr("Def Value");
+        setText(mDefaultValue);
         setOnPreferenceChangeListener(this);
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
+        String mIPAddress = (String) newValue;
+        ConfiguratorProvider.getInstance(getContext()).IpAddress().put(mIPAddress);
         return true;
     }
 }
