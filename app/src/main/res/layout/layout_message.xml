@@ -27,12 +27,12 @@
         android:src="@drawable/ic_check"
         android:layout_below="@+id/activity_message_toolbar"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:layout_marginRight="16dp"
         android:layout_marginTop="-32dp"
         android:transitionName="button"
         fab:fab_colorNormal="@color/color_message_fab_normal"
-        fab:fab_colorPressed="@color/color_message_fab_pressed"/>
+        fab:fab_colorPressed="@color/color_message_fab_pressed"
+        fab:fab_size="normal"/>
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/activity_speech_reponse_edittext"

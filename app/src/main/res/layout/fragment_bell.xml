@@ -21,8 +21,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         android:layout_margin="16dp"
+        fab:fab_labelStyle="@style/menu_labels_style"
+        fab:fab_expandDirection="up"
         fab:fab_addButtonColorNormal="@color/color_home_fab_normal"
-        fab:fab_addButtonColorPressed="@color/color_home_fab_pressed">
+        fab:fab_addButtonColorPressed="@color/color_home_fab_pressed"
+        fab:fab_size="normal">
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fragment_bell_response_message"
