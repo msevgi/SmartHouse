@@ -2,6 +2,7 @@
     <color name="color_home_primary">#FF8F00</color>
     <color name="color_home_primary_dark">#FF6F00</color>
     <color name="color_home_accent">#FFFF00</color>
+    <color name="color_home_secondry_accent">#FF8F00</color>
 
     <color name="color_message_primary">#F5F5F5</color>
     <color name="color_message_primary_dark">#424242</color>

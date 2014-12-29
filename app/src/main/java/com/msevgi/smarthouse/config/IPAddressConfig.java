@@ -5,6 +5,7 @@ import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.util.AttributeSet;
 
+import com.msevgi.smarthouse.constant.ApplicationConstants;
 import com.msevgi.smarthouse.provider.ConfiguratorProvider;
 
 public final class IPAddressConfig extends EditTextPreference implements Preference.OnPreferenceChangeListener {
@@ -25,15 +26,16 @@ public final class IPAddressConfig extends EditTextPreference implements Prefere
     }
 
     private void init() {
-        String mDefaultValue = ConfiguratorProvider.getInstance(getContext()).IpAddress().getOr("Def Value");
-        setText(mDefaultValue);
+        String ipAddress = ApplicationConstants.API_URL;
+        String currentValue = ConfiguratorProvider.getInstance(getContext()).IpAddress().getOr(ipAddress);
+        setText(currentValue);
         setOnPreferenceChangeListener(this);
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        String mIPAddress = (String) newValue;
-        ConfiguratorProvider.getInstance(getContext()).IpAddress().put(mIPAddress);
+        String value = (String) newValue;
+        ConfiguratorProvider.getInstance(getContext()).IpAddress().put(value);
         return true;
     }
 }

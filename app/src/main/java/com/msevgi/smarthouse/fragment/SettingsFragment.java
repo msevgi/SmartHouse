@@ -2,6 +2,7 @@ package com.msevgi.smarthouse.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.TypedValue;
 
 import com.github.machinarius.preferencefragment.PreferenceFragment;
 import com.msevgi.smarthouse.R;

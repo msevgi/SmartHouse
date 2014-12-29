@@ -9,6 +9,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.msevgi.smarthouse.R;
@@ -37,6 +39,9 @@ public final class MessageActivity extends BaseActivity implements Callback<Spee
 
     @InjectView(R.id.activity_message_toolbar)
     protected Toolbar mToolbar;
+
+    @InjectView(R.id.activity_speech_language_switch)
+    protected RadioGroup mRadioGroup;
 
     private SpeechListAdapter mAdapter;
     private MaterialDialog mDialog;
@@ -98,11 +103,15 @@ public final class MessageActivity extends BaseActivity implements Callback<Spee
     public void onAcceptButtonClicked() {
         String speechString = mResponseEditText.getText().toString();
 
-        SpeechRequestBean mRequestBean = new SpeechRequestBean(speechString);
-        mRequestBean.setLanguage("TR");
+        int radioId = mRadioGroup.getCheckedRadioButtonId();
+        RadioButton radioButton = (RadioButton) findViewById(radioId);
+        String language = (String) radioButton.getText();
+
+        SpeechRequestBean requestBean = new SpeechRequestBean(speechString);
+        requestBean.setLanguage(language);
 
         SpeechRestInterface responseInterface = RestAdapterProvider.getInstance().create(SpeechRestInterface.class);
-        responseInterface.send(mRequestBean, this);
+        responseInterface.send(requestBean, this);
 
         SmartHouseContentProvider.Speech speech = new SmartHouseContentProvider.Speech();
         speech.setLanguage(Language.TR);
