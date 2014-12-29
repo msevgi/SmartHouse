@@ -49,9 +49,9 @@ public final class SnapshotFragment extends BaseFragment {
 
     @Subscribe
     public void onSnapshotSuccessEvent(SnapshotSuccessResponseEvent event) {
-        Bitmap mBitmap = event.getBitmap();
+        Bitmap bitmap = event.getBitmap();
         mLoadingImageView.hideProgress();
-        mLoadingImageView.setImageBitmap(mBitmap);
+        mLoadingImageView.setImageBitmap(bitmap);
     }
 
 

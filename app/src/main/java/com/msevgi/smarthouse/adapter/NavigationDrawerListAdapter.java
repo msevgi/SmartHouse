@@ -23,20 +23,20 @@ public final class NavigationDrawerListAdapter extends ArrayAdapter<NavigationIt
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder mViewHolder;
+        ViewHolder viewHolder;
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.cell_drawer, parent, false);
-            mViewHolder = new ViewHolder(convertView);
-            convertView.setTag(mViewHolder);
+            viewHolder = new ViewHolder(convertView);
+            convertView.setTag(viewHolder);
         } else
-            mViewHolder = (ViewHolder) convertView.getTag();
+            viewHolder = (ViewHolder) convertView.getTag();
 
-        int mTextResourceId = getItem(position).getTextResource();
-        CharSequence mText = getContext().getString(mTextResourceId);
-        mViewHolder.mTextView.setText(mText);
+        int textResourceId = getItem(position).getTextResource();
+        CharSequence text = getContext().getString(textResourceId);
+        viewHolder.mTextView.setText(text);
 
-        int mDrawableResourceId = getItem(position).getDrawableResource();
-        mViewHolder.mTextView.setCompoundDrawablesWithIntrinsicBounds(mDrawableResourceId, 0, 0, 0);
+        int drawableResourceId = getItem(position).getDrawableResource();
+        viewHolder.mTextView.setCompoundDrawablesWithIntrinsicBounds(drawableResourceId, 0, 0, 0);
 
         return convertView;
     }

@@ -40,25 +40,25 @@ public final class BellListAdapter extends CursorAdapter {
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        View mView = mInflater.inflate(R.layout.cell_bell, parent, false);
-        ViewHolder mHolder = new ViewHolder(mView);
-        mView.setTag(mHolder);
+        View view = mInflater.inflate(R.layout.cell_bell, parent, false);
+        ViewHolder holder = new ViewHolder(view);
+        view.setTag(holder);
 
-        return mView;
+        return view;
     }
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-        ViewHolder mViewHolder = (ViewHolder) view.getTag();
+        ViewHolder viewHolder = (ViewHolder) view.getTag();
 
         long mTimestamp = cursor.getLong(mTimestampIndex);
-        Date mDate = new Date(mTimestamp);
-        String mTime = mPrettyTime.format(mDate);
-        mViewHolder.mDateTextView.setText(mTime);
+        Date date = new Date(mTimestamp);
+        String time = mPrettyTime.format(date);
+        viewHolder.mDateTextView.setText(time);
 
-        byte[] mByteArray = cursor.getBlob(mBitmapIndex);
-        Bitmap mBitmap = BitmapFactory.decodeByteArray(mByteArray, 0, mByteArray.length);
-        mViewHolder.mImageView.setImageBitmap(mBitmap);
+        byte[] byteArray = cursor.getBlob(mBitmapIndex);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+        viewHolder.mImageView.setImageBitmap(bitmap);
     }
 
     protected static class ViewHolder {

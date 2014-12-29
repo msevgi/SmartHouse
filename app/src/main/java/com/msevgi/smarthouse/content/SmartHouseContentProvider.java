@@ -72,16 +72,16 @@ public final class SmartHouseContentProvider extends AbstractProvider {
         }
 
         private byte[] getByteArray() {
-            ByteArrayOutputStream mOutputStream = new ByteArrayOutputStream();
-            mBitmap.compress(Bitmap.CompressFormat.PNG, 100, mOutputStream);
-            return mOutputStream.toByteArray();
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            mBitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+            return outputStream.toByteArray();
         }
 
         public ContentValues toContentValues() {
-            ContentValues mContentValues = new ContentValues();
-            mContentValues.put(KEY_TIME_STAMP, mTimestamp);
-            mContentValues.put(KEY_BITMAP, getByteArray());
-            return mContentValues;
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(KEY_TIME_STAMP, mTimestamp);
+            contentValues.put(KEY_BITMAP, getByteArray());
+            return contentValues;
         }
     }
 

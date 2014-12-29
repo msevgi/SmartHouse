@@ -8,8 +8,8 @@ import android.view.inputmethod.InputMethodManager;
 public final class AndroidUtil {
 
     public static void hideKeyboard(Activity activity) {
-        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
-        IBinder mWindowToken = activity.getWindow().getDecorView().getRootView().getWindowToken();
-        imm.hideSoftInputFromWindow(mWindowToken, 0);
+        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        IBinder windowToken = activity.getWindow().getDecorView().getRootView().getWindowToken();
+        inputMethodManager.hideSoftInputFromWindow(windowToken, 0);
     }
 }

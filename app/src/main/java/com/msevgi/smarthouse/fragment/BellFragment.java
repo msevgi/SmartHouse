@@ -47,20 +47,20 @@ public final class BellFragment extends BaseFragment implements Runnable, SnackB
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Uri mBellUri = SmartHouseContentProvider.getBellUri();
-        String mReverseOrder = SmartHouseContentProvider.Bell.KEY_ID + " DESC";
-        Cursor mCursor = getActivity().getContentResolver().query(mBellUri, null, null, null, mReverseOrder);
-        BellListAdapter mAdapter = new BellListAdapter(getContext(), mCursor);
-        mListView.setAdapter(mAdapter);
+        Uri bellUri = SmartHouseContentProvider.getBellUri();
+        String reverseOrder = SmartHouseContentProvider.Bell.KEY_ID + " DESC";
+        Cursor cursor = getActivity().getContentResolver().query(bellUri, null, null, null, reverseOrder);
+        BellListAdapter adapter = new BellListAdapter(getContext(), cursor);
+        mListView.setAdapter(adapter);
 
         mResponseMenu.attachToListView(mListView);
     }
 
     @OnClick(R.id.fragment_bell_response_message)
     public void onResponseButtonClicked(View view) {
-        Intent mIntent = new Intent(getContext(), MessageActivity.class);
-        ActivityOptionsCompat mOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), view, "button");
-        ActivityCompat.startActivity(getActivity(), mIntent, mOptions.toBundle());
+        Intent intent = new Intent(getContext(), MessageActivity.class);
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), view, "button");
+        ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
 
         mResponseMenu.postCollapse();
     }

@@ -30,10 +30,10 @@ public class SnapshotAsyncTask extends AsyncTask<Void, Void, Boolean> {
     @Override
     protected Boolean doInBackground(Void... params) {
         try {
-            SnapshotRestInterface mSnapshotRestInterface = RestAdapterProvider.getInstance().create(SnapshotRestInterface.class);
-            Response mResponse = mSnapshotRestInterface.getByteArray();
-            InputStream mInputStream = mResponse.getBody().in();
-            mBitmap = BitmapFactory.decodeStream(mInputStream);
+            SnapshotRestInterface snapshotRestInterface = RestAdapterProvider.getInstance().create(SnapshotRestInterface.class);
+            Response response = snapshotRestInterface.getByteArray();
+            InputStream inputStream = response.getBody().in();
+            mBitmap = BitmapFactory.decodeStream(inputStream);
 
             return true;
         } catch (Exception e) {

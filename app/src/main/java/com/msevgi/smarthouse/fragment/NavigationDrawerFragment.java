@@ -48,16 +48,16 @@ public final class NavigationDrawerFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        List<NavigationItem> mNavigationItems = getMenu();
-        NavigationDrawerListAdapter mAdapter = new NavigationDrawerListAdapter(getContext(), mNavigationItems);
-        mDrawerList.setAdapter(mAdapter);
+        List<NavigationItem> navigationItems = getMenu();
+        NavigationDrawerListAdapter adapter = new NavigationDrawerListAdapter(getContext(), navigationItems);
+        mDrawerList.setAdapter(adapter);
     }
 
     @OnItemClick(R.id.fragment_navigation_drawer_list)
     public void onDrawerListItemSelected(int position) {
-        NavigationItemSelectEvent mEvent = new NavigationItemSelectEvent();
-        mEvent.setPosition(position);
-        BusProvider.getInstance().post(mEvent);
+        NavigationItemSelectEvent event = new NavigationItemSelectEvent();
+        event.setPosition(position);
+        BusProvider.getInstance().post(event);
 
         closeDrawer();
         mDrawerList.setItemChecked(position, true);
@@ -97,9 +97,9 @@ public final class NavigationDrawerFragment extends BaseFragment {
     }
 
     public void navigate(int position) {
-        NavigationItemSelectEvent mEvent = new NavigationItemSelectEvent();
-        mEvent.setPosition(position);
-        BusProvider.getInstance().post(mEvent);
+        NavigationItemSelectEvent event = new NavigationItemSelectEvent();
+        event.setPosition(position);
+        BusProvider.getInstance().post(event);
 
         mDrawerList.setItemChecked(position, true);
     }

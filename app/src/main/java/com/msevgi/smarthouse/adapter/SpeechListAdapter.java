@@ -31,20 +31,20 @@ public final class SpeechListAdapter extends CursorAdapter {
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        View mView = mInflater.inflate(R.layout.cell_speech, parent, false);
-        ViewHolder mHolder = new ViewHolder(mView);
-        mView.setTag(mHolder);
+        View view = mInflater.inflate(R.layout.cell_speech, parent, false);
+        ViewHolder holder = new ViewHolder(view);
+        view.setTag(holder);
 
-        return mView;
+        return view;
     }
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-        ViewHolder mViewHolder = (ViewHolder) view.getTag();
+        ViewHolder viewHolder = (ViewHolder) view.getTag();
 
-        String mSpeech = cursor.getString(mContentIndex);
-        mViewHolder.mSpeechTextView.setSpeech(mSpeech);
-        mViewHolder.mSpeechTextView.setText(mSpeech);
+        String speech = cursor.getString(mContentIndex);
+        viewHolder.mSpeechTextView.setSpeech(speech);
+        viewHolder.mSpeechTextView.setText(speech);
     }
 
     protected static class ViewHolder {
@@ -58,10 +58,10 @@ public final class SpeechListAdapter extends CursorAdapter {
 
         @OnClick(R.id.cell_speech_textview)
         public void onSpeechItemSelected(SpeechTextView view) {
-            String mSpeech = view.getSpeech();
-            SpeechItemSelectEvent mEvent = new SpeechItemSelectEvent();
-            mEvent.setSpeech(mSpeech);
-            BusProvider.getInstance().post(mEvent);
+            String speechString = view.getSpeech();
+            SpeechItemSelectEvent event = new SpeechItemSelectEvent();
+            event.setSpeech(speechString);
+            BusProvider.getInstance().post(event);
         }
     }
 

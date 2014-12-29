@@ -11,7 +11,6 @@ public final class NavigationItem {
     @StringRes
     int mTextResource;
 
-
     private
     @NonNull
     @DrawableRes

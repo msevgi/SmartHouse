@@ -37,40 +37,40 @@ public final class GcmMessageHandler extends IntentService {
     protected void onHandleIntent(Intent intent) {
         Bundle mExtras = intent.getExtras();
 
-        String mId = mExtras.getString("id");
-        String mTitle = mExtras.getString("title");
+        String id = mExtras.getString("id");
+        String title = mExtras.getString("title");
 
-        Bitmap mBitmap = null;
-        Bitmap mThumbnail = null;
+        Bitmap bitmap = null;
+        Bitmap thumbnail = null;
         try {
-            PhotoRestInterface mRestInterface = RestAdapterProvider.getInstance().create(PhotoRestInterface.class);
-            Response mResponse = mRestInterface.getByteArray(mId);
-            InputStream mInputStream = mResponse.getBody().in();
+            PhotoRestInterface restInterface = RestAdapterProvider.getInstance().create(PhotoRestInterface.class);
+            Response response = restInterface.getByteArray(id);
+            InputStream inputStream = response.getBody().in();
 
-            mBitmap = BitmapFactory.decodeStream(mInputStream);
-            mThumbnail = ThumbnailUtils.extractThumbnail(mBitmap, 256, 256);
+            bitmap = BitmapFactory.decodeStream(inputStream);
+            thumbnail = ThumbnailUtils.extractThumbnail(bitmap, 256, 256);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        SmartHouseContentProvider.Bell mBell = new SmartHouseContentProvider.Bell();
-        mBell.setTimestamp(System.currentTimeMillis());
-        mBell.setBitmap(mBitmap);
+        SmartHouseContentProvider.Bell bell = new SmartHouseContentProvider.Bell();
+        bell.setTimestamp(System.currentTimeMillis());
+        bell.setBitmap(bitmap);
 
         Uri mBellUri = SmartHouseContentProvider.getBellUri();
-        getContentResolver().insert(mBellUri, mBell.toContentValues());
+        getContentResolver().insert(mBellUri, bell.toContentValues());
 
-        NotificationFacade mNotificationFacade = new NotificationFacade(this);
-        mNotificationFacade
+        NotificationFacade notificationFacade = new NotificationFacade(this);
+        notificationFacade
                 .getBuilder()
                 .setContentTitle("Door has ring!")
-                .setContentText("The id of photo is " + mId)
+                .setContentText("The id of photo is " + id)
                 .setSmallIcon(R.drawable.ic_bell)
-                .setLargeIcon(mThumbnail);
-        mNotificationFacade.show();
+                .setLargeIcon(thumbnail);
+        notificationFacade.show();
 
-        NewBellEvent mEvent = new NewBellEvent();
-        BusProvider.getInstance().post(mEvent);
+        NewBellEvent event = new NewBellEvent();
+        BusProvider.getInstance().post(event);
 
         GcmBroadcastReceiver.completeWakefulIntent(intent);
     }

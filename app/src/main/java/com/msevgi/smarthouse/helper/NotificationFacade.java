@@ -23,7 +23,7 @@ public final class NotificationFacade {
     }
 
     public void show() {
-        int mNotificationId = NotificationIdProvider.getNotificationId();
-        mNotificationManager.notify(mNotificationId, mBuilder.build());
+        int notificationId = NotificationIdProvider.getNotificationId();
+        mNotificationManager.notify(notificationId, mBuilder.build());
     }
 }

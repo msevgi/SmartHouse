@@ -56,9 +56,9 @@ public final class MessageActivity extends BaseActivity implements Callback<Spee
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_cancel);
         mToolbar.setTitleTextColor(Color.BLACK);
 
-        Uri mSpeechUri = SmartHouseContentProvider.getSpeechUri();
-        Cursor mCursor = getContentResolver().query(mSpeechUri, null, null, null, null);
-        mAdapter = new SpeechListAdapter(this, mCursor);
+        Uri speechUri = SmartHouseContentProvider.getSpeechUri();
+        Cursor cursor = getContentResolver().query(speechUri, null, null, null, null);
+        mAdapter = new SpeechListAdapter(this, cursor);
         mDialog = new MaterialDialog.Builder(this)
                 .title("Choose a template")
                 .adapter(mAdapter)
@@ -88,28 +88,28 @@ public final class MessageActivity extends BaseActivity implements Callback<Spee
 
     @Subscribe
     public void onSpeechItemSelected(SpeechItemSelectEvent event) {
-        String mSpeech = event.getSpeech();
-        mResponseEditText.setText(mSpeech);
-        mResponseEditText.setSelection(mSpeech.length());
+        String speech = event.getSpeech();
+        mResponseEditText.setText(speech);
+        mResponseEditText.setSelection(speech.length());
         mDialog.dismiss();
     }
 
     @OnClick(R.id.activity_speech_accept_button)
     public void onAcceptButtonClicked() {
-        String mSpeechString = mResponseEditText.getText().toString();
+        String speechString = mResponseEditText.getText().toString();
 
-        SpeechRequestBean mRequestBean = new SpeechRequestBean(mSpeechString);
+        SpeechRequestBean mRequestBean = new SpeechRequestBean(speechString);
         mRequestBean.setLanguage("TR");
 
-        SpeechRestInterface mResponseInterface = RestAdapterProvider.getInstance().create(SpeechRestInterface.class);
-        mResponseInterface.send(mRequestBean, this);
+        SpeechRestInterface responseInterface = RestAdapterProvider.getInstance().create(SpeechRestInterface.class);
+        responseInterface.send(mRequestBean, this);
 
-        SmartHouseContentProvider.Speech mSpeech = new SmartHouseContentProvider.Speech();
-        mSpeech.setLanguage(Language.TR);
-        mSpeech.setContent(mSpeechString);
+        SmartHouseContentProvider.Speech speech = new SmartHouseContentProvider.Speech();
+        speech.setLanguage(Language.TR);
+        speech.setContent(speechString);
 
-        Uri mSpeechUri = SmartHouseContentProvider.getSpeechUri();
-        getContentResolver().insert(mSpeechUri, mSpeech.toContentValues());
+        Uri speechUri = SmartHouseContentProvider.getSpeechUri();
+        getContentResolver().insert(speechUri, speech.toContentValues());
     }
 
     @Override
