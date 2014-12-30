@@ -26,7 +26,7 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public final class HomeActivity extends BaseActivity implements Callback<TokenRequestBean> {
+public final class HomeActivity extends BaseActivity {
 
     @InjectView(R.id.activity_home_toolbar)
     protected Toolbar mToolbar;
@@ -52,8 +52,6 @@ public final class HomeActivity extends BaseActivity implements Callback<TokenRe
         mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.activity_home_fragment_drawer);
         mNavigationDrawerFragment.setup(R.id.activity_home_fragment_drawer, mDrawerLayout, mToolbar);
         mNavigationDrawerFragment.navigate(BellFragment.POSITION);
-
-        new GcmRegisterAsyncTask(this).execute();
     }
 
     @Subscribe
@@ -89,16 +87,7 @@ public final class HomeActivity extends BaseActivity implements Callback<TokenRe
         NavigationHelper.setPosition(position);
     }
 
-    @Subscribe
-    public void onTokenSendEvent(TokenSendEvent event) {
-        String token = event.getmToken();
 
-        TokenRequestBean tokenRequestBean = new TokenRequestBean();
-        tokenRequestBean.setApikey(token);
-
-        TokenRestInterface tokenRestInterface = RestAdapterProvider.getInstance().create(TokenRestInterface.class);
-        tokenRestInterface.send(tokenRequestBean, this);
-    }
 
     @Override
     public void onBackPressed() {
@@ -106,18 +95,5 @@ public final class HomeActivity extends BaseActivity implements Callback<TokenRe
             mNavigationDrawerFragment.closeDrawer();
         else
             super.onBackPressed();
-    }
-
-    private void sendToken() {
-        new GcmRegisterAsyncTask(this).execute();
-    }
-
-    @Override
-    public void success(TokenRequestBean tokenRequestBean, Response response) {
-    }
-
-    @Override
-    public void failure(RetrofitError error) {
-
     }
 }
