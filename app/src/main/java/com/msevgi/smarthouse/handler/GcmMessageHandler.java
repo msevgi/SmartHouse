@@ -1,6 +1,7 @@
 package com.msevgi.smarthouse.handler;
 
 import android.app.IntentService;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import com.msevgi.smarthouse.R;
+import com.msevgi.smarthouse.activity.HomeActivity;
 import com.msevgi.smarthouse.content.SmartHouseContentProvider;
 import com.msevgi.smarthouse.event.NewBellEvent;
 import com.msevgi.smarthouse.helper.NotificationFacade;
@@ -60,17 +62,28 @@ public final class GcmMessageHandler extends IntentService {
         Uri mBellUri = SmartHouseContentProvider.getBellUri();
         getContentResolver().insert(mBellUri, bell.toContentValues());
 
+        Intent notificationIntent = new Intent(this, HomeActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        Uri soundUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.doorbell);
+
         NotificationFacade notificationFacade = new NotificationFacade(this);
         notificationFacade
                 .getBuilder()
                 .setContentTitle("Door has ring!")
                 .setContentText("The id of photo is " + id)
                 .setSmallIcon(R.drawable.ic_bell)
-                .setLargeIcon(thumbnail);
+                .setLargeIcon(thumbnail)
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+                .setSound(soundUri);
         notificationFacade.show();
 
         NewBellEvent event = new NewBellEvent();
         BusProvider.getInstance().post(event);
+
+        bitmap.recycle();
+        thumbnail.recycle();
 
         GcmBroadcastReceiver.completeWakefulIntent(intent);
     }

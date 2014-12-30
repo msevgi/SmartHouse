@@ -1,6 +1,7 @@
 package com.msevgi.smarthouse.activity;
 
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -89,5 +90,4 @@ public final class HomeActivity extends BaseActivity {
         else
             super.onBackPressed();
     }
-
 }
