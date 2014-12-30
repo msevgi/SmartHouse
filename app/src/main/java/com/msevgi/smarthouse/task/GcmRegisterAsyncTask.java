@@ -5,7 +5,12 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.msevgi.smarthouse.bean.TokenRequestBean;
 import com.msevgi.smarthouse.constant.ApplicationConstants;
+import com.msevgi.smarthouse.event.TokenSendEvent;
+import com.msevgi.smarthouse.interfaces.TokenRestInterface;
+import com.msevgi.smarthouse.provider.BusProvider;
+import com.msevgi.smarthouse.provider.RestAdapterProvider;
 
 import java.io.IOException;
 
@@ -33,6 +38,11 @@ public final class GcmRegisterAsyncTask extends AsyncTask<Void, Void, String> {
     protected void onPostExecute(String registrationId) {
         if (registrationId == null)
             return;
+
+        TokenSendEvent event = new TokenSendEvent();
+        event.setmToken(registrationId);
+
+        BusProvider.getInstance().post(event);
 
         Log.i("GCM", registrationId);
     }

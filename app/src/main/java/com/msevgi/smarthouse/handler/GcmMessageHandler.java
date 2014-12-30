@@ -59,8 +59,8 @@ public final class GcmMessageHandler extends IntentService {
         bell.setTimestamp(System.currentTimeMillis());
         bell.setBitmap(bitmap);
 
-        Uri mBellUri = SmartHouseContentProvider.getBellUri();
-        getContentResolver().insert(mBellUri, bell.toContentValues());
+        Uri bellUri = SmartHouseContentProvider.getBellUri();
+        getContentResolver().insert(bellUri, bell.toContentValues());
 
         Intent notificationIntent = new Intent(this, HomeActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
