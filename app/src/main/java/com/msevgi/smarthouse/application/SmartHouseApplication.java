@@ -1,6 +1,7 @@
 package com.msevgi.smarthouse.application;
 
 import android.app.Application;
+import android.content.Context;
 import android.widget.Toast;
 
 import com.msevgi.smarthouse.bean.TokenRequestBean;
@@ -43,4 +44,5 @@ public final class SmartHouseApplication extends BaseApplication implements Call
     public void failure(RetrofitError error) {
         // TODO Log failure
     }
+
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.util.AttributeSet;
+import android.widget.Toast;
 
 import com.msevgi.smarthouse.constant.ApplicationConstants;
 import com.msevgi.smarthouse.provider.ConfiguratorProvider;
@@ -35,7 +36,9 @@ public final class IPAddressConfig extends EditTextPreference implements Prefere
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         String value = (String) newValue;
-        ConfiguratorProvider.getInstance(getContext()).IpAddress().put(value);
+        ConfiguratorProvider.getInstance(getContext()).IpAddress().put(value).commit();
+
+        Toast.makeText(getContext(), "Please restart application.", Toast.LENGTH_SHORT).show();
         return true;
     }
 }

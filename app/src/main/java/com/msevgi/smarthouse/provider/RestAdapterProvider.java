@@ -1,5 +1,8 @@
 package com.msevgi.smarthouse.provider;
 
+import android.content.Context;
+
+import com.msevgi.smarthouse.application.SmartHouseApplication;
 import com.msevgi.smarthouse.constant.ApplicationConstants;
 
 import retrofit.RestAdapter;
@@ -8,11 +11,15 @@ public final class RestAdapterProvider {
     private static RestAdapter sAdapter;
 
     public static RestAdapter getInstance() {
-        if (sAdapter == null)
+        if (sAdapter == null) {
+            Context context = SmartHouseApplication.getContext();
+            String ipAddress = ConfiguratorProvider.getInstance(context).IpAddress().getOr(ApplicationConstants.API_URL);
+
             sAdapter = new RestAdapter
                     .Builder()
-                    .setEndpoint(ApplicationConstants.API_URL)
+                    .setEndpoint(ipAddress)
                     .build();
+        }
 
         return sAdapter;
     }

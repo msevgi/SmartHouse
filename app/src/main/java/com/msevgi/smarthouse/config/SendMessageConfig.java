@@ -33,7 +33,7 @@ public final class SendMessageConfig extends CheckBoxPreference implements Prefe
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         boolean value = (boolean) newValue;
-        ConfiguratorProvider.getInstance(getContext()).sendSMS().put(value);
+        ConfiguratorProvider.getInstance(getContext()).sendSMS().put(value).commit();
         return true;
     }
 }
