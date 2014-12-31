@@ -7,12 +7,14 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.github.mrengineer13.snackbar.SnackBar;
 import com.msevgi.smarthouse.R;
 import com.msevgi.smarthouse.adapter.SpeechListAdapter;
 import com.msevgi.smarthouse.bean.SpeechRequestBean;
@@ -22,7 +24,7 @@ import com.msevgi.smarthouse.event.SpeechItemSelectEvent;
 import com.msevgi.smarthouse.interfaces.SpeechRestInterface;
 import com.msevgi.smarthouse.model.Language;
 import com.msevgi.smarthouse.provider.RestAdapterProvider;
-import com.msevgi.smarthouse.util.AndroidUtil;
+import com.msevgi.smarthouse.util.AndroidUtils;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.squareup.otto.Subscribe;
 
@@ -103,6 +105,15 @@ public final class MessageActivity extends BaseActivity implements Callback<Spee
     public void onAcceptButtonClicked() {
         String speechString = mResponseEditText.getText().toString();
 
+        if (TextUtils.isEmpty(speechString)) {
+            AndroidUtils.hideKeyboard(this);
+            new SnackBar
+                    .Builder(this)
+                    .withMessage("Message can not be empty.")
+                    .show();
+            return;
+        }
+
         int radioId = mRadioGroup.getCheckedRadioButtonId();
         RadioButton radioButton = (RadioButton) findViewById(radioId);
         String language = (String) radioButton.getText();
@@ -133,7 +144,7 @@ public final class MessageActivity extends BaseActivity implements Callback<Spee
 
     @Override
     public void onBackPressed() {
-        AndroidUtil.hideKeyboard(this);
+        AndroidUtils.hideKeyboard(this);
         super.onBackPressed();
     }
 
