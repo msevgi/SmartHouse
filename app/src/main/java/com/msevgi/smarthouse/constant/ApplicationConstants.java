@@ -4,6 +4,6 @@ public final class ApplicationConstants {
 
     public static final String PROJECT_NUMBER = "145243954863";
 
-    public static final String API_URL = "http://192.168.70.113:8080";
+    public static final String API_URL = "http://192.168.43.195:8080";
 
 }

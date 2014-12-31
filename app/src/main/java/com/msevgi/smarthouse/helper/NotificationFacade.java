@@ -7,7 +7,6 @@ import android.support.v4.app.NotificationCompat;
 import com.msevgi.smarthouse.provider.NotificationIdProvider;
 
 public final class NotificationFacade {
-
     private Context mContext;
     private NotificationCompat.Builder mBuilder;
     private NotificationManager mNotificationManager;
