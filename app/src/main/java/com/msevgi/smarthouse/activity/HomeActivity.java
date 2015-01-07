@@ -8,23 +8,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 
 import com.msevgi.smarthouse.R;
-import com.msevgi.smarthouse.bean.TokenRequestBean;
 import com.msevgi.smarthouse.event.NavigationItemSelectEvent;
-import com.msevgi.smarthouse.event.TokenSendEvent;
 import com.msevgi.smarthouse.fragment.BellFragment;
 import com.msevgi.smarthouse.fragment.NavigationDrawerFragment;
 import com.msevgi.smarthouse.fragment.SettingsFragment;
 import com.msevgi.smarthouse.fragment.SnapshotFragment;
 import com.msevgi.smarthouse.helper.NavigationHelper;
-import com.msevgi.smarthouse.interfaces.TokenRestInterface;
-import com.msevgi.smarthouse.provider.RestAdapterProvider;
-import com.msevgi.smarthouse.task.GcmRegisterAsyncTask;
 import com.squareup.otto.Subscribe;
 
 import butterknife.InjectView;
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
 
 public final class HomeActivity extends BaseActivity {
 
@@ -48,6 +40,11 @@ public final class HomeActivity extends BaseActivity {
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
 
         mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.activity_home_fragment_drawer);
         mNavigationDrawerFragment.setup(R.id.activity_home_fragment_drawer, mDrawerLayout, mToolbar);
@@ -86,7 +83,6 @@ public final class HomeActivity extends BaseActivity {
 
         NavigationHelper.setPosition(position);
     }
-
 
 
     @Override
