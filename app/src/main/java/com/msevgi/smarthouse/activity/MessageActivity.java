@@ -68,7 +68,7 @@ public final class MessageActivity extends BaseActivity implements Callback<Spee
         mAdapter = new SpeechListAdapter(this, cursor);
         mDialog = new MaterialDialog.Builder(this)
                 .title("Choose a template")
-                .adapter(mAdapter)
+                .adapter(mAdapter, null)
                 .build();
     }
 

@@ -20,7 +20,7 @@ android {
             storePassword '123456'
         }
 
-        signingTest {
+        signingDevelop {
             keyAlias 'smarthouse'
             keyPassword '123456'
             storeFile file('keystore/test.jks')
@@ -38,10 +38,10 @@ android {
             zipAlignEnabled true
         }
 
-        test {
+        develop {
             debuggable true
             jniDebuggable false
-            signingConfig signingConfigs.signingTest
+            signingConfig signingConfigs.signingDevelop
             renderscriptDebuggable false
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -66,7 +66,7 @@ dependencies {
     compile 'com.android.support:cardview-v7:21.0.0'
     compile 'com.github.mrengineer13:snackbar:0.5.0'
     compile 'com.rengwuxian.materialedittext:library:1.5.0'
-    compile 'com.afollestad:material-dialogs:0.4.3'
+    compile 'com.afollestad:material-dialogs:0.7.6.0'
     compile 'com.pnikosis:materialish-progress:1.2'
     compile 'com.squareup:otto:1.3.5'
     compile 'com.squareup.retrofit:retrofit:1.8.0'
