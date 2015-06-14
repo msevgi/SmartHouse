@@ -5,24 +5,18 @@ import android.support.annotation.NonNull;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
-import android.widget.EditText;
 
 import com.msevgi.smarthouse.R;
+import com.msevgi.smarthouse.constant.ApplicationConstants;
 
 import butterknife.InjectView;
 
-public final class StreamFragment extends BaseFragment implements View.OnClickListener {
+public final class StreamFragment extends BaseFragment {
 
     public static final int POSITION = 3;
 
     @InjectView(R.id.fragment_stream_webview)
     protected WebView mWebView;
-
-    @InjectView(R.id.fragment_stream_url)
-    protected EditText mUrlEditText;
-
-    @InjectView(R.id.fragment_stream_watch)
-    protected Button mButtonGo;
 
     @NonNull
     @Override
@@ -40,15 +34,18 @@ public final class StreamFragment extends BaseFragment implements View.OnClickLi
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mButtonGo.setOnClickListener(this);
+        init();
     }
 
-    @Override
-    public void onClick(View view) {
+
+    public void init() {
+        String url = ApplicationConstants.API_URL;
+        String[] split = url.split(":");
+
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder
-                .append("http://")
-                .append(mUrlEditText.getText().toString())
+                .append("http:")
+                .append(split[1])
                 .append(":9000/stream");
 
         mWebView.setInitialScale(100);
