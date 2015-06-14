@@ -5,9 +5,11 @@ import android.support.annotation.NonNull;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.msevgi.smarthouse.R;
 import com.msevgi.smarthouse.constant.ApplicationConstants;
+import com.msevgi.smarthouse.provider.ConfiguratorProvider;
 
 import butterknife.InjectView;
 
@@ -39,8 +41,8 @@ public final class StreamFragment extends BaseFragment {
 
 
     public void init() {
-        String url = ApplicationConstants.API_URL;
-        String[] split = url.split(":");
+        String ipAddress = ConfiguratorProvider.getInstance(getContext()).IpAddress().getOr(ApplicationConstants.API_URL);
+        String[] split = ipAddress.split(":");
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder
@@ -50,5 +52,7 @@ public final class StreamFragment extends BaseFragment {
 
         mWebView.setInitialScale(100);
         mWebView.loadUrl(stringBuilder.toString());
+
+        Toast.makeText(getContext(), stringBuilder.toString(), Toast.LENGTH_LONG).show();
     }
 }
