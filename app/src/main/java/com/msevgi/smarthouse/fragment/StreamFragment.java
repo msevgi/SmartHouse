@@ -20,7 +20,7 @@ import retrofit.client.Response;
 
 public final class StreamFragment extends BaseFragment implements Callback<CameraStateResponseBean> {
 
-    public static final int POSITION = 4;
+    public static final int POSITION = 2;
 
     @InjectView(R.id.fragment_stream_webview)
     protected WebView mWebView;

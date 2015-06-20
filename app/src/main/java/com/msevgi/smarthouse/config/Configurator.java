@@ -16,7 +16,11 @@ public final class Configurator extends PrettySharedPreferences<Configurator> {
         return getStringEditor("ip_address");
     }
 
-    public BooleanEditor<Configurator> doNotDistrub() {
+    public StringEditor<Configurator> MSISDN() {
+        return getStringEditor("msisdn");
+    }
+
+    public BooleanEditor<Configurator> doNotDisturb() {
         return getBooleanEditor("do_not_disturb");
     }
 

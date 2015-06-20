@@ -6,15 +6,15 @@ public final class TokenSendEvent {
     public TokenSendEvent() {
     }
 
-    public TokenSendEvent(String mToken) {
-        this.mToken = mToken;
+    public TokenSendEvent(String token) {
+        this.mToken = token;
     }
 
-    public String getmToken() {
+    public String getToken() {
         return mToken;
     }
 
-    public void setmToken(String mToken) {
+    public void setToken(String mToken) {
         this.mToken = mToken;
     }
 }

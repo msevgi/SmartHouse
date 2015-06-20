@@ -74,24 +74,24 @@ public final class HomeActivity extends BaseActivity {
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                         .commit();
                 break;
-            case SettingsFragment.POSITION:
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.activity_home_container, new StreamFragment())
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                        .commit();
-                break;
             case StreamFragment.POSITION:
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.activity_home_container, new WebRTCFragment())
+                        .replace(R.id.activity_home_container, new StreamFragment())
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                         .commit();
                 break;
             case WebRTCFragment.POSITION:
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.activity_home_container, new StreamFragment())
+                        .replace(R.id.activity_home_container, new WebRTCFragment())
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                        .commit();
+                break;
+            case SettingsFragment.POSITION:
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.activity_home_container, new SettingsFragment())
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                         .commit();
                 break;

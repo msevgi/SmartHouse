@@ -6,9 +6,9 @@ import retrofit.http.Path;
 
 public interface DoNotDisturbRestInterface {
 
-    @GET("/donotdisturb/{value}")
+    @GET("/donotdisturb/{value}/{id}")
     void trigger(
-            @Path("value") boolean value, Callback<Object> callback
+            @Path("value") boolean value, @Path("id") int id, Callback<Object> callback
     );
 
 }

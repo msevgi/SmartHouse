@@ -5,6 +5,7 @@ import android.support.v7.widget.SwitchCompat;
 import android.util.AttributeSet;
 import android.widget.CompoundButton;
 
+import com.msevgi.smarthouse.constant.RegisterConstants;
 import com.msevgi.smarthouse.interfaces.DoNotDisturbRestInterface;
 import com.msevgi.smarthouse.provider.ConfiguratorProvider;
 import com.msevgi.smarthouse.provider.RestAdapterProvider;
@@ -37,7 +38,7 @@ public final class DoNotDisturbPresenter extends SwitchCompat implements Compoun
     }
 
     private void init() {
-        Boolean value = ConfiguratorProvider.getInstance(getContext()).doNotDistrub().getOr(false);
+        Boolean value = ConfiguratorProvider.getInstance(getContext()).doNotDisturb().getOr(false);
         setChecked(value);
 
         setOnCheckedChangeListener(this);
@@ -45,10 +46,10 @@ public final class DoNotDisturbPresenter extends SwitchCompat implements Compoun
 
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean newValue) {
-        ConfiguratorProvider.getInstance(getContext()).doNotDistrub().put(newValue).commit();
+        ConfiguratorProvider.getInstance(getContext()).doNotDisturb().put(newValue).commit();
 
         DoNotDisturbRestInterface doNotDisturbRestInterface = RestAdapterProvider.getInstance().create(DoNotDisturbRestInterface.class);
-        doNotDisturbRestInterface.trigger(newValue, this);
+        doNotDisturbRestInterface.trigger(newValue, RegisterConstants.getID(), this);
     }
 
     @Override

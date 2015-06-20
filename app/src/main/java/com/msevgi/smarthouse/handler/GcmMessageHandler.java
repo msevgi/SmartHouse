@@ -63,7 +63,7 @@ public final class GcmMessageHandler extends IntentService {
         Uri bellUri = SmartHouseContentProvider.getBellUri();
         getContentResolver().insert(bellUri, bell.toContentValues());
 
-        boolean doNotDisturb = ConfiguratorProvider.getInstance(getApplicationContext()).doNotDistrub().getOr(false);
+        boolean doNotDisturb = ConfiguratorProvider.getInstance(getApplicationContext()).doNotDisturb().getOr(false);
         if (doNotDisturb)
             return;
 

@@ -8,4 +8,11 @@
             android:title="IP Address"/>
     </PreferenceCategory>
 
+    <!-- MSISDN !-->
+    <PreferenceCategory
+        android:title="Register">
+        <com.msevgi.smarthouse.config.MSISDNConfig
+            android:title="Phone number"/>
+    </PreferenceCategory>
+
 </PreferenceScreen>

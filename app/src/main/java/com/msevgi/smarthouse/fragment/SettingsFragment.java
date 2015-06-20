@@ -8,7 +8,7 @@ import com.github.machinarius.preferencefragment.PreferenceFragment;
 import com.msevgi.smarthouse.R;
 
 public final class SettingsFragment extends PreferenceFragment {
-    public static final int POSITION = 2;
+    public static final int POSITION = 4;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

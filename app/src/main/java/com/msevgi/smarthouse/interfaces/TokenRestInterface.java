@@ -9,5 +9,5 @@ import retrofit.http.POST;
 public interface TokenRestInterface {
 
     @POST("/newapikey")
-    void send(@Body TokenRequestBean body, Callback<TokenRequestBean> callback);
+    void send(@Body TokenRequestBean body, Callback<Object> callback);
 }
