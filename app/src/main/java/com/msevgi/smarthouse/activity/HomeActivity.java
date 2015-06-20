@@ -14,6 +14,7 @@ import com.msevgi.smarthouse.fragment.NavigationDrawerFragment;
 import com.msevgi.smarthouse.fragment.SettingsFragment;
 import com.msevgi.smarthouse.fragment.SnapshotFragment;
 import com.msevgi.smarthouse.fragment.StreamFragment;
+import com.msevgi.smarthouse.fragment.WebRTCFragment;
 import com.msevgi.smarthouse.helper.NavigationHelper;
 import com.squareup.otto.Subscribe;
 
@@ -84,6 +85,13 @@ public final class HomeActivity extends BaseActivity {
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.activity_home_container, new StreamFragment())
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                        .commit();
+                break;
+            case WebRTCFragment.POSITION:
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.activity_home_container, new WebRTCFragment())
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                         .commit();
                 break;

@@ -118,6 +118,7 @@ public final class NavigationDrawerFragment extends BaseFragment {
         items.add(new NavigationItem(R.string.title_snapshot, R.drawable.ic_snapshot));
         items.add(new NavigationItem(R.string.title_settings, R.drawable.ic_settings));
         items.add(new NavigationItem(R.string.title_stream, R.drawable.ic_snapshot));
+        items.add(new NavigationItem(R.string.title_web_rtc, R.drawable.ic_snapshot));
         return items;
     }
 
