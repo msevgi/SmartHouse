@@ -15,7 +15,7 @@ import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.nineoldandroids.view.ViewHelper;
 import com.nineoldandroids.view.ViewPropertyAnimator;
 
-public class ExtendedFloatingActionMenu extends FloatingActionsMenu implements Runnable {
+public final class ExtendedFloatingActionMenu extends FloatingActionsMenu implements Runnable {
     private static final int TRANSLATE_DURATION_MILLIS = 200;
 
     private int mPostTime = 1000;

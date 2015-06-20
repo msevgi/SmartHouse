@@ -1,4 +1,4 @@
 package com.msevgi.smarthouse.event;
 
-public class NewBellEvent {
+public final class NewBellEvent {
 }

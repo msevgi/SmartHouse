@@ -16,7 +16,7 @@ import java.io.InputStream;
 
 import retrofit.client.Response;
 
-public class SnapshotAsyncTask extends AsyncTask<Void, Void, Boolean> {
+public final class SnapshotAsyncTask extends AsyncTask<Void, Void, Boolean> {
     Bitmap mBitmap = null;
 
     @Override

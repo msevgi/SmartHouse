@@ -1,6 +1,6 @@
 package com.msevgi.smarthouse.event;
 
-public class TokenSendEvent {
+public final class TokenSendEvent {
     private String mToken;
 
     public TokenSendEvent() {

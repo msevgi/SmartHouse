@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.msevgi.smarthouse.constant.ApplicationConstants;
 import com.msevgi.smarthouse.provider.ConfiguratorProvider;
+import com.msevgi.smarthouse.provider.RestAdapterProvider;
 
 public final class IPAddressConfig extends EditTextPreference implements Preference.OnPreferenceChangeListener {
 
@@ -38,7 +39,7 @@ public final class IPAddressConfig extends EditTextPreference implements Prefere
         String value = (String) newValue;
         ConfiguratorProvider.getInstance(getContext()).IpAddress().put(value).commit();
 
-        Toast.makeText(getContext(), "Please restart application.", Toast.LENGTH_SHORT).show();
+        RestAdapterProvider.init();
         return true;
     }
 }

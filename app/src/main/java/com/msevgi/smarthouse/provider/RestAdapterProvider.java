@@ -23,4 +23,14 @@ public final class RestAdapterProvider {
 
         return sAdapter;
     }
+
+    public static void init() {
+        Context context = SmartHouseApplication.getContext();
+        String ipAddress = ConfiguratorProvider.getInstance(context).IpAddress().getOr(ApplicationConstants.API_URL);
+
+        sAdapter = new RestAdapter
+                .Builder()
+                .setEndpoint(ipAddress)
+                .build();
+    }
 }

@@ -7,7 +7,7 @@ import android.util.TypedValue;
 import com.github.machinarius.preferencefragment.PreferenceFragment;
 import com.msevgi.smarthouse.R;
 
-public class SettingsFragment extends PreferenceFragment {
+public final class SettingsFragment extends PreferenceFragment {
     public static final int POSITION = 2;
 
     @Override

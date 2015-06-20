@@ -63,7 +63,6 @@ public final class StreamFragment extends BaseFragment implements Callback<Camer
                 .append(split[1])
                 .append(":9000/stream");
 
-        mWebView.setInitialScale(100);
         mWebView.loadUrl(stringBuilder.toString());
 
         Toast.makeText(getContext(), stringBuilder.toString(), Toast.LENGTH_LONG).show();
