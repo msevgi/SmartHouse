@@ -10,7 +10,7 @@ import android.widget.Toast;
 import com.msevgi.smarthouse.R;
 import com.msevgi.smarthouse.bean.CameraStateResponseBean;
 import com.msevgi.smarthouse.constant.ApplicationConstants;
-import com.msevgi.smarthouse.interfaces.SwitchStreamRestInterface;
+import com.msevgi.smarthouse.interfaces.StreamRestInterface;
 import com.msevgi.smarthouse.provider.ConfiguratorProvider;
 import com.msevgi.smarthouse.provider.RestAdapterProvider;
 
@@ -21,7 +21,7 @@ import retrofit.client.Response;
 
 public final class WebRTCFragment extends BaseFragment implements Callback<CameraStateResponseBean> {
 
-    public static final int POSITION = 4;
+    public static final int POSITION = 3;
 
     @InjectView(R.id.fragment_web_rtc_webview)
     protected WebView mWebView;
@@ -42,16 +42,16 @@ public final class WebRTCFragment extends BaseFragment implements Callback<Camer
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        SwitchStreamRestInterface switchRestInterface = RestAdapterProvider.getInstance().create(SwitchStreamRestInterface.class);
-        switchRestInterface.trigger(SwitchStreamRestInterface.ON, this);
+        StreamRestInterface switchRestInterface = RestAdapterProvider.getInstance().create(StreamRestInterface.class);
+        switchRestInterface.trigger(StreamRestInterface.ON, this);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
 
-        SwitchStreamRestInterface switchRestInterface = RestAdapterProvider.getInstance().create(SwitchStreamRestInterface.class);
-        switchRestInterface.trigger(SwitchStreamRestInterface.OFF, this);
+        StreamRestInterface switchRestInterface = RestAdapterProvider.getInstance().create(StreamRestInterface.class);
+        switchRestInterface.trigger(StreamRestInterface.OFF, this);
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -77,9 +77,9 @@ public final class WebRTCFragment extends BaseFragment implements Callback<Camer
         int state = cameraStateResponseBean.getState();
 
         switch (state) {
-            case SwitchStreamRestInterface.OFF:
+            case StreamRestInterface.OFF:
                 return;
-            case SwitchStreamRestInterface.ON:
+            case StreamRestInterface.ON:
                 init();
                 return;
         }

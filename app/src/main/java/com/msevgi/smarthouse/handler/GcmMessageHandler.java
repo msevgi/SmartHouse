@@ -16,6 +16,7 @@ import com.msevgi.smarthouse.event.NewBellEvent;
 import com.msevgi.smarthouse.helper.NotificationFacade;
 import com.msevgi.smarthouse.interfaces.PhotoRestInterface;
 import com.msevgi.smarthouse.provider.BusProvider;
+import com.msevgi.smarthouse.provider.ConfiguratorProvider;
 import com.msevgi.smarthouse.provider.RestAdapterProvider;
 import com.msevgi.smarthouse.receiver.GcmBroadcastReceiver;
 
@@ -61,6 +62,10 @@ public final class GcmMessageHandler extends IntentService {
 
         Uri bellUri = SmartHouseContentProvider.getBellUri();
         getContentResolver().insert(bellUri, bell.toContentValues());
+
+        boolean doNotDisturb = ConfiguratorProvider.getInstance(getApplicationContext()).doNotDistrub().getOr(false);
+        if (doNotDisturb)
+            return;
 
         Intent notificationIntent = new Intent(this, HomeActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);

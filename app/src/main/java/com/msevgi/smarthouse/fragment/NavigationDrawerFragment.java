@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ListView;
 
@@ -51,6 +52,7 @@ public final class NavigationDrawerFragment extends BaseFragment {
         List<NavigationItem> navigationItems = getMenu();
         NavigationDrawerListAdapter adapter = new NavigationDrawerListAdapter(getContext(), navigationItems);
         mDrawerList.setAdapter(adapter);
+
     }
 
     @OnItemClick(R.id.fragment_navigation_drawer_list)
@@ -116,9 +118,9 @@ public final class NavigationDrawerFragment extends BaseFragment {
         List<NavigationItem> items = new ArrayList<NavigationItem>();
         items.add(new NavigationItem(R.string.title_bell, R.drawable.ic_home));
         items.add(new NavigationItem(R.string.title_snapshot, R.drawable.ic_snapshot));
-        items.add(new NavigationItem(R.string.title_settings, R.drawable.ic_settings));
         items.add(new NavigationItem(R.string.title_stream, R.drawable.ic_snapshot));
         items.add(new NavigationItem(R.string.title_web_rtc, R.drawable.ic_snapshot));
+        items.add(new NavigationItem(R.string.title_settings, R.drawable.ic_settings));
         return items;
     }
 

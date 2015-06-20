@@ -8,11 +8,4 @@
             android:title="IP Address"/>
     </PreferenceCategory>
 
-    <!-- Message !-->
-    <PreferenceCategory
-        android:title="Message">
-        <com.msevgi.smarthouse.config.SendMessageConfig
-            android:title="Send message"/>
-    </PreferenceCategory>
-
 </PreferenceScreen>

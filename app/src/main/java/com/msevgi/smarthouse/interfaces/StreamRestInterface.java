@@ -6,7 +6,7 @@ import retrofit.Callback;
 import retrofit.http.GET;
 import retrofit.http.Path;
 
-public interface SwitchStreamRestInterface {
+public interface StreamRestInterface {
 
     int ON = 1;
     int OFF = 0;

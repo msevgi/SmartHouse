@@ -16,8 +16,8 @@ public final class Configurator extends PrettySharedPreferences<Configurator> {
         return getStringEditor("ip_address");
     }
 
-    public BooleanEditor<Configurator> sendSMS() {
-        return getBooleanEditor("send_sms");
+    public BooleanEditor<Configurator> doNotDistrub() {
+        return getBooleanEditor("do_not_disturb");
     }
 
 }
