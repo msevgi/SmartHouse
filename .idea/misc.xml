@@ -9,13 +9,14 @@
   </component>
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
-    <list size="6">
+    <list size="7">
       <item index="0" class="java.lang.String" itemvalue="butterknife.InjectView" />
       <item index="1" class="java.lang.String" itemvalue="butterknife.OnClick" />
       <item index="2" class="java.lang.String" itemvalue="butterknife.OnItemClick" />
       <item index="3" class="java.lang.String" itemvalue="butterknife.OnItemSelected" />
       <item index="4" class="java.lang.String" itemvalue="com.squareup.otto.Subscribe" />
       <item index="5" class="java.lang.String" itemvalue="de.triplet.simpleprovider.Column" />
+      <item index="6" class="java.lang.String" itemvalue="retrofit.http.GET" />
     </list>
   </component>
   <component name="NullableNotNullManager">

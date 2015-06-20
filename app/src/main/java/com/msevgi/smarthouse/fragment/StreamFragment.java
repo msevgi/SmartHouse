@@ -4,16 +4,21 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.webkit.WebView;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.msevgi.smarthouse.R;
+import com.msevgi.smarthouse.bean.CameraStateResponseBean;
 import com.msevgi.smarthouse.constant.ApplicationConstants;
+import com.msevgi.smarthouse.interfaces.SwitchStreamRestInterface;
 import com.msevgi.smarthouse.provider.ConfiguratorProvider;
+import com.msevgi.smarthouse.provider.RestAdapterProvider;
 
 import butterknife.InjectView;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
-public final class StreamFragment extends BaseFragment {
+public final class StreamFragment extends BaseFragment implements Callback<CameraStateResponseBean> {
 
     public static final int POSITION = 3;
 
@@ -36,9 +41,17 @@ public final class StreamFragment extends BaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        init();
+        SwitchStreamRestInterface switchRestInterface = RestAdapterProvider.getInstance().create(SwitchStreamRestInterface.class);
+        switchRestInterface.trigger(SwitchStreamRestInterface.ON, this);
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        SwitchStreamRestInterface switchRestInterface = RestAdapterProvider.getInstance().create(SwitchStreamRestInterface.class);
+        switchRestInterface.trigger(SwitchStreamRestInterface.OFF, this);
+    }
 
     public void init() {
         String ipAddress = ConfiguratorProvider.getInstance(getContext()).IpAddress().getOr(ApplicationConstants.API_URL);
@@ -54,5 +67,24 @@ public final class StreamFragment extends BaseFragment {
         mWebView.loadUrl(stringBuilder.toString());
 
         Toast.makeText(getContext(), stringBuilder.toString(), Toast.LENGTH_LONG).show();
+    }
+
+
+    @Override
+    public void success(CameraStateResponseBean cameraStateResponseBean, Response response) {
+        int state = cameraStateResponseBean.getState();
+
+        switch (state) {
+            case SwitchStreamRestInterface.OFF:
+                return;
+            case SwitchStreamRestInterface.ON:
+                init();
+                return;
+        }
+    }
+
+    @Override
+    public void failure(RetrofitError error) {
+
     }
 }
