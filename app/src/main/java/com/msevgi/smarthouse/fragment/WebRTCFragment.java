@@ -1,10 +1,15 @@
 package com.msevgi.smarthouse.fragment;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
+import android.webkit.CookieManager;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import com.msevgi.smarthouse.R;
@@ -65,7 +70,7 @@ public final class WebRTCFragment extends BaseFragment implements Callback<Camer
                 .append(split[1])
                 .append(":9000/stream/webrtc");
 
-        mWebView.getSettings().setJavaScriptEnabled(true);
+        setUpWebViewDefaults(mWebView);
         mWebView.loadUrl(stringBuilder.toString());
 
         Toast.makeText(getContext(), stringBuilder.toString(), Toast.LENGTH_LONG).show();
@@ -88,5 +93,24 @@ public final class WebRTCFragment extends BaseFragment implements Callback<Camer
     @Override
     public void failure(RetrofitError error) {
 
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private void setUpWebViewDefaults(WebView webView) {
+        WebSettings settings = webView.getSettings();
+        settings.setJavaScriptEnabled(true);
+        settings.setUseWideViewPort(true);
+        settings.setLoadWithOverviewMode(true);
+        settings.setBuiltInZoomControls(true);
+        settings.setDomStorageEnabled(true);
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB) {
+            settings.setDisplayZoomControls(false);
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            WebView.setWebContentsDebuggingEnabled(true);
+        }
+        webView.setWebViewClient(new WebViewClient());
+        CookieManager cookieManager = CookieManager.getInstance();
+        cookieManager.setAcceptThirdPartyCookies(webView, true);
     }
 }
